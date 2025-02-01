@@ -15,7 +15,7 @@ public class CoOrdinates {
     private int x;
     private int y;
     
-    private static final List <Character> ALLOWEDALPHAS = new ArrayList(List.of('A', 'B', 'C', 'D', 'E','F','G','H'));
+    private static final List<Character> ALLOWEDALPHAS = Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H');
 
     public CoOrdinates(int x, int y) {
         this.x = x;
@@ -71,11 +71,11 @@ public class CoOrdinates {
         d means direction
         up = +1, down = -1
     */ 
-    public int moveVertical(int m, int d){ 
+    public CoOrdinates moveVertical(int m, int d){ 
         if (d == 0) {
             throw new IllegalArgumentException("Invalid direction: must be +1 (up) or -1 (down)");
         }
-        return this.y + (m * d);
+        return new CoOrdinates(x, this.y + (m * d));
     }// close moveVertical(char c)
     
     /* Move horizontally
@@ -83,31 +83,31 @@ public class CoOrdinates {
         right is +1
         left is -1
     */
-    public int moveHorizontal(int m, int d){
+    public CoOrdinates moveHorizontal(int m, int d){
         if (d == 0) {
             throw new IllegalArgumentException("Invalid direction: must be +1 (right) or -1 (left)");
         }
-        return this.x + (m * d);
+        return new CoOrdinates(this.x + (m * d), y);
     }// close moveHorizontal(char c)
     
-    /* Move diagonally
-        backslash direction
-        d means direction
-        left and up = +1
-        right and down = -1
+    /**
+    * Moves diagonally in a backslash (\) pattern.
+    * @param m Number of steps to move.
+    * @param d Direction: +1 for up-left, -1 for down-right.
+    * @return New CoOrdinates object with updated position.
     */
     public CoOrdinates moveDiagonalBS(int m, int d){
-        return new CoOrdinates(moveHorizontal(m, -d), moveVertical(m, d));
+        return new CoOrdinates(x - (m * d), y + (m * d));
     }// close moveDiagonalBS(int m, int d)
     
-    /* Move diagonally
-        fs: forward slash movement
-        d means direction
-        right and up +1
-        left and down -1
+    /**
+    * Moves diagonally in a forward slash (/) pattern.
+    * @param m Number of steps to move.
+    * @param d Direction: +1 for up-right, -1 for down-left.
+    * @return New CoOrdinates object with updated position.
     */
     public CoOrdinates moveDiagonalFS(int m, int d){
-        return new CoOrdinates(moveHorizontal(m, d), moveVertical(m, d));
+        return new CoOrdinates(x + (m * d), y + (m * d));
     }// close moveDiagonalFS(int m, int d)
 
     public int getX() {
@@ -143,5 +143,24 @@ public class CoOrdinates {
         
         return isOOB(number) || !ALLOWEDALPHAS.contains(letter);
     }// close checkOutOfBounds(int t)
+    
+    //Checks this co-ordinate
+    public boolean isOOB(){
+        return isOOB(this.x) || isOOB(this.y);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        CoOrdinates that = (CoOrdinates) obj;
+        return x == that.x && y == that.y;
+    }
+
+@Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
     
 } //close class

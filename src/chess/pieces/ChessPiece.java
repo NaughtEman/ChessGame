@@ -16,19 +16,21 @@ public abstract class ChessPiece {
     
     private CoOrdinates cordnts;
     
-    private boolean canKill = false;
-    private boolean isAlive = true;
+    //private boolean canKill = false;
+    private boolean isFree = true;
+    boolean isWhite = true;
     
     private String name;
     
+    private ChessPiece capturedBy;
+    
     private List<CoOrdinates> allowedMoves = new ArrayList<>();
     
-    public ChessPiece(String name, CoOrdinates initialPosition) {
+    public ChessPiece(String name, CoOrdinates initialPosition, boolean isWhite) {
     this.name = name;
-    this.cordnts = initialPosition;
-    this.isAlive = true; // Assuming the piece starts alive
+    this.cordnts = initialPosition; 
+    this.isWhite = isWhite;
 }
-
 
     // get its current co-ordinates
     public CoOrdinates getCordnts() {
@@ -50,7 +52,6 @@ public abstract class ChessPiece {
         this.name = name;
     }
 
-    
     // returns a copy of the allowedMoves list
     public List<CoOrdinates> getAllowedMoves() {
         return new ArrayList<>(allowedMoves);
@@ -67,9 +68,17 @@ public abstract class ChessPiece {
         
     } // close getCanMoveTo()
 
-    // Adds a coordinate to the allowed moves list
+    // Adds a coordinate to the allowed moves list if its not Out Of Bounds
     public void addAllowedMove(CoOrdinates cd) {
-        this.allowedMoves.add(cd);
+        if (!cd.isOOB() && !allowedMoves.contains(cd)) {
+            this.allowedMoves.add(cd);
+        }
+    }
+
+    
+    // Removes a coordinate from the allowed moves list
+    public void removeAllowedMove(CoOrdinates cd) {
+        allowedMoves.remove(cd);
     }
     
     // reset allowedMoves list
@@ -78,6 +87,26 @@ public abstract class ChessPiece {
     }
 
     
+    public boolean getTeamColour() {
+        return isWhite;
+    }
+    
+    public void deathNote(ChessPiece cp) {
+        this.capturedBy = cp;
+        this.isFree = false;   
+    }
+    
+    public ChessPiece getCapturedBy() {
+        return capturedBy;
+    }
+
     public abstract void movementLogic();
+    
+    @Override
+    public String toString() {
+        return name + " at " + cordnts.getCordnts() + " [" + (isWhite ? "White" : "Black") + "]";
+    }
+
+
     
 }
