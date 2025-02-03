@@ -67,9 +67,11 @@ public class CoOrdinates {
         
     }// close getXInInt(char c)
     
-    /* Move vertically 
-        d means direction
-        up = +1, down = -1
+    /**
+     * Moves horizontally
+     * @param m Number of steps to move.
+     * @param d Direction: +1 for up, -1 for down.
+     * @return New CoOrdinates object with updated position.
     */ 
     public CoOrdinates moveVertical(int m, int d){ 
         if (d == 0) {
@@ -78,10 +80,11 @@ public class CoOrdinates {
         return new CoOrdinates(x, this.y + (m * d));
     }// close moveVertical(char c)
     
-    /* Move horizontally
-        d means direction
-        right is +1
-        left is -1
+    /**
+     * Moves horizontally
+     * @param m Number of steps to move.
+     * @param d Direction: +1 for right, -1 for left.
+     * @return New CoOrdinates object with updated position.
     */
     public CoOrdinates moveHorizontal(int m, int d){
         if (d == 0) {

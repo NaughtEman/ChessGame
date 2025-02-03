@@ -13,7 +13,6 @@ import chess.CoOrdinates;
 public class Pawn extends ChessPiece{
     
     boolean isFirstMove = true;
-    boolean isWhite;
 
      public Pawn(CoOrdinates initialPosition, boolean isWhite) {
         super("Pawn", initialPosition, isWhite);
@@ -25,12 +24,14 @@ public class Pawn extends ChessPiece{
         
         int direction = getTeamColour() ? 1 : -1; // White moves up (+1), Black moves down (-1)
         
+        
+        
         // Normal move: Move 1 square forward
-        addAllowedMove(getCordnts().moveVertical(direction, 0));
+        addAllowedMove(getCordnts().moveVertical(1, direction));
 
         // First move: Can move 2 squares forward
         if (isFirstMove) {
-            addAllowedMove(getCordnts().moveVertical(2 * direction, 0));
+            addAllowedMove(getCordnts().moveVertical(2, direction));
         }
 
         // Capture moves: Diagonal left and right

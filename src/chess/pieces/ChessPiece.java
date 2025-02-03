@@ -61,7 +61,13 @@ public abstract class ChessPiece {
     public void showAllowedMoves() {
         
         if (!allowedMoves.isEmpty()) {
-            System.out.println("Allowed Moves: " + allowedMoves);
+            System.out.println("Allowed Moves: ");
+            for(CoOrdinates temp : allowedMoves){
+                System.out.print( "[" + temp.getCordnts() + "]" + ",");
+            }
+            
+            System.out.println();
+            
         } else {
             System.out.println("No moves available");
         }

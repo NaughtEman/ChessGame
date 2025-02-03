@@ -4,6 +4,9 @@
  */
 package chess;
 
+import chess.pieces.*;
+
+
 /**
  *
  * @author dosum
@@ -22,8 +25,21 @@ public class Tester {
         
         System.out.println(cd.getCordnts());
         
-        cd.setCordnts(1, 3);
+        Pawn p = new Pawn(cd, true);
+        
+        p.movementLogic();
+        
+        p.showAllowedMoves();
+        p.toString();
+        
+        cd.setCordnts(4, 4);
         System.out.println(cd.getCordnts());
+        Rook r = new Rook(cd, true);
+        r.movementLogic();
+        r.showAllowedMoves();
+        r.toString();
+        
+        
     }
     
 }
