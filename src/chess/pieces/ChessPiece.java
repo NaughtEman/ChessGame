@@ -99,14 +99,15 @@ public abstract class ChessPiece {
     public ChessPiece getCapturedBy() {
         return capturedBy;
     }
+    
+    public String getFullName(){
+        return String.format( isWhite ? "White" : "Black" + " " + getName());
+    }
 
     public abstract void movementLogic();
     
     @Override
     public String toString() {
         return name + " at " + cordnts.getCordnts() + " [" + (isWhite ? "White" : "Black") + "]";
-    }
-
-
-    
+    } 
 }
