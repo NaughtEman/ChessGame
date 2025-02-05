@@ -4,8 +4,6 @@
  */
 package chess.pieces;
 
-import chess.CoOrdinates;
-
 /**
  *
  * @author dosum
@@ -17,14 +15,23 @@ public class Pawn extends ChessPiece{
      public Pawn(CoOrdinates initialPosition, boolean isWhite) {
         super("Pawn", initialPosition, isWhite);
     }
+     
+     @Override
+     // Update the chess piece co-ordinates
+    public void updateCordnts(CoOrdinates cordnts) {
+        super.updateCordnts(cordnts);
+        isFirstMove = false;
+        
+    }
 
+     /** Calculates the movement logic for the Rook
+      * 
+      */
     @Override
     public void movementLogic() {
         clearAllowedMoves();
         
-        int direction = getTeamColour() ? 1 : -1; // White moves up (+1), Black moves down (-1)
-        
-        
+        int direction = getTeamColour() ? 1 : -1; // White moves up (+1), Black moves down (-1) 
         
         // Normal move: Move 1 square forward
         addAllowedMove(getCordnts().moveVertical(1, direction));
@@ -37,8 +44,6 @@ public class Pawn extends ChessPiece{
         // Capture moves: Diagonal left and right
         //addAllowedMove(current.moveVertical(direction, -1));
         //addAllowedMove(current.moveVertical(direction, 1));
-
-        isFirstMove = false;
     }
     
 }

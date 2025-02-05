@@ -4,6 +4,7 @@
  */
 package chess;
 
+import chess.pieces.CoOrdinates;
 import chess.pieces.ChessPiece;
 import java.util.*;
 import java.util.concurrent.*;

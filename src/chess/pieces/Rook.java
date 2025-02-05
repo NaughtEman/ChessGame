@@ -4,8 +4,6 @@
  */
 package chess.pieces;
 
-import chess.CoOrdinates;
-
 /**
  *
  * @author dosum
@@ -15,7 +13,10 @@ public class Rook extends ChessPiece{
      public Rook(CoOrdinates initialPosition, boolean isWhite) {
         super("Rook", initialPosition, isWhite);
     }
-
+     
+     /** Calculates the movement logic for the Rook
+      * 
+      */
     @Override
     public void movementLogic() {
         clearAllowedMoves();

@@ -9,7 +9,6 @@ package chess.pieces;
  * @author dosum
  */
 
-import chess.CoOrdinates;
 import java.util.*;
 
 public abstract class ChessPiece {
@@ -30,6 +29,7 @@ public abstract class ChessPiece {
     this.name = name;
     this.cordnts = initialPosition; 
     this.isWhite = isWhite;
+    movementLogic();
 }
 
     // get its current co-ordinates
@@ -40,6 +40,9 @@ public abstract class ChessPiece {
     // Update the chess piece co-ordinates
     public void updateCordnts(CoOrdinates cordnts) {
         this.cordnts = cordnts;
+        movementLogic();
+        // Use when incoporating AI or if performance becomes an issue. 
+        // new Thread(this::movementLogic).start(); 
     }
     
     // get chess piece name (rook,pawn e.t.c)
@@ -80,7 +83,6 @@ public abstract class ChessPiece {
             this.allowedMoves.add(cd);
         }
     }
-
     
     // Removes a coordinate from the allowed moves list
     public void removeAllowedMove(CoOrdinates cd) {
@@ -91,7 +93,6 @@ public abstract class ChessPiece {
     public void clearAllowedMoves() {
         this.allowedMoves.clear();
     }
-
     
     public boolean getTeamColour() {
         return isWhite;

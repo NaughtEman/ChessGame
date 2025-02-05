@@ -4,6 +4,7 @@
  */
 package chess;
 
+import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 
 
@@ -21,23 +22,39 @@ public class Tester {
         
         CoOrdinates cd = new CoOrdinates();
         
+        System.out.println("For the Pawn");
         cd.setCordnts('A', 3);
-        
         System.out.println(cd.getCordnts());
         
         Pawn p = new Pawn(cd, true);
-        
-        p.movementLogic();
-        
+        p.updateCordnts(cd);
         p.showAllowedMoves();
-        p.toString();
+        //p.toString();
+        
+        System.out.println("For the Rook");
         
         cd.setCordnts(4, 4);
         System.out.println(cd.getCordnts());
+        
         Rook r = new Rook(cd, true);
-        r.movementLogic();
         r.showAllowedMoves();
-        r.toString();
+        //r.toString();
+        
+        System.out.println("For the Bishop");
+        cd.setCordnts(4, 4);
+        System.out.println(cd.getCordnts());
+        
+        Bishop b = new Bishop(cd, true);
+        b.showAllowedMoves();
+        //b.toString();
+        
+        System.out.println("For the Knight");
+        cd.setCordnts(4, 4);
+        System.out.println(cd.getCordnts());
+        
+        Knight k = new Knight(cd, true);
+        k.showAllowedMoves();
+        //b.toString();
         
         
     }
