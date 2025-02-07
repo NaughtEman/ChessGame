@@ -18,13 +18,11 @@ public class Bishop extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        for(int i = 1; i < 8; i++){
-            addAllowedMove(getCordnts().moveDiagonalBS(i, 1));  
-            addAllowedMove(getCordnts().moveDiagonalBS(i, -1)); 
-           
-            addAllowedMove(getCordnts().moveDiagonalFS(i, 1));  
-            addAllowedMove(getCordnts().moveDiagonalFS(i, -1)); 
+        int[][] diagonalMoves = {{1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
+        for (int[] move : diagonalMoves) {
+            for (int i = 1; i <= 7; i++) {
+                addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
+            }
         }
     }
-    
 }

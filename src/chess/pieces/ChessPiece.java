@@ -98,6 +98,10 @@ public abstract class ChessPiece {
         return isWhite;
     }
     
+    public void updateCordinate(CoOrdinates cd){
+        cordnts.setCordnts(cd.getX(),cd.getY());
+    }
+    
     public void deathNote(ChessPiece cp) {
         this.capturedBy = cp;
         this.isFree = false;   

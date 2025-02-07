@@ -68,50 +68,14 @@ public class CoOrdinates {
     }// close getXInInt(char c)
     
     /**
-     * Moves horizontally
-     * @param m Number of steps to move.
-     * @param d Direction: +1 for up, -1 for down.
-     * @return New CoOrdinates object with updated position.
-    */ 
-    public CoOrdinates moveVertical(int m, int d){ 
-        if (d == 0) {
-            throw new IllegalArgumentException("Invalid direction: must be +1 (up) or -1 (down)");
-        }
-        return new CoOrdinates(x, this.y + (m * d));
-    }// close moveVertical(char c)
-    
-    /**
-     * Moves horizontally
-     * @param m Number of steps to move.
-     * @param d Direction: +1 for right, -1 for left.
-     * @return New CoOrdinates object with updated position.
-    */
-    public CoOrdinates moveHorizontal(int m, int d){
-        if (d == 0) {
-            throw new IllegalArgumentException("Invalid direction: must be +1 (right) or -1 (left)");
-        }
-        return new CoOrdinates(this.x + (m * d), y);
-    }// close moveHorizontal(char c)
-    
-    /**
-    * Moves diagonally in a backslash (\) pattern.
-    * @param m Number of steps to move.
-    * @param d Direction: +1 for up-left, -1 for down-right.
+    * Custom movement.
+    * @param a Change x by adding a.
+    * @param b Change y by adding b.
     * @return New CoOrdinates object with updated position.
     */
-    public CoOrdinates moveDiagonalBS(int m, int d){
-        return new CoOrdinates(x - (m * d), y + (m * d));
-    }// close moveDiagonalBS(int m, int d)
-    
-    /**
-    * Moves diagonally in a forward slash (/) pattern.
-    * @param m Number of steps to move.
-    * @param d Direction: +1 for up-right, -1 for down-left.
-    * @return New CoOrdinates object with updated position.
-    */
-    public CoOrdinates moveDiagonalFS(int m, int d){
-        return new CoOrdinates(x + (m * d), y + (m * d));
-    }// close moveDiagonalFS(int m, int d)
+    public CoOrdinates moveCustom(int a, int b){
+        return new CoOrdinates(x + a, y + b);
+    }
 
     public int getX() {
         return x;

@@ -31,14 +31,14 @@ public class Pawn extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        int direction = getTeamColour() ? 1 : -1; // White moves up (+1), Black moves down (-1) 
+        int d = getTeamColour() ? 1 : -1; // White moves up (+1), Black moves down (-1) 
         
         // Normal move: Move 1 square forward
-        addAllowedMove(getCordnts().moveVertical(1, direction));
+        addAllowedMove(getCordnts().moveCustom(0, d));
 
         // First move: Can move 2 squares forward
         if (isFirstMove) {
-            addAllowedMove(getCordnts().moveVertical(2, direction));
+            addAllowedMove(getCordnts().moveCustom(0, 2* d));
         }
 
         // Capture moves: Diagonal left and right

@@ -56,6 +56,13 @@ public class Tester {
         k.showAllowedMoves();
         //b.toString();
         
+        System.out.println("For the King");
+        cd.setCordnts(4, 4);
+        System.out.println(cd.getCordnts());
+        
+        King kg = new King(cd, true);
+        kg.showAllowedMoves();
+        //b.toString();
         
     }
     
