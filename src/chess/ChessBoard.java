@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 public class ChessBoard {
     
     // Holds all chess pieces name (color and name of chess piece) and thier coordinates
-    private Map<CoOrdinates, String> cbCordnts = new ConcurrentHashMap();
+    private Map<CoOrdinates, String> board = new ConcurrentHashMap();
     
     private static ChessBoard instance;
     
@@ -33,7 +33,7 @@ public class ChessBoard {
      * @return True if free, false if occupied.
      */
     public boolean isFree(CoOrdinates cd) {
-        return !cbCordnts.containsKey(cd);
+        return !board.containsKey(cd);
     }
     
     // automatically fill cbCordnts with co-ordinates
@@ -47,7 +47,7 @@ public class ChessBoard {
      */
     public synchronized boolean placePiece(ChessPiece piece, CoOrdinates cd) {
         if (isFree(cd)) {
-            cbCordnts.put(cd, piece.getFullName());
+            board.put(cd, piece.getFullName());
             return true;
         }
         return false; // Space is occupied
@@ -58,12 +58,30 @@ public class ChessBoard {
      * @param cd The coordinate to clear.
      */
     public synchronized void removePiece(CoOrdinates cd) {
-        cbCordnts.remove(cd);
+        board.remove(cd);
     }
     
-    // Displays the board
-    public void displayBoard(){
-    // Display board logic
+    /** 
+     * Displays the board
+     */
+    public void displayBoard() {
+        System.out.println("  A  B  C  D  E  F  G  H"); // Column labels
+
+        for (int y = 8; y >= 1; y--) { // Looping from 8 to 1 (since chessboards are displayed top-down)
+            System.out.print(y + " "); // Row number at the start of each row
+
+            for (int x = 1; x <= 8; x++) {
+                CoOrdinates tempCD = new CoOrdinates(x, y);
+
+                if (board.containsKey(tempCD)) {
+                    System.out.print(board.get(tempCD) + " "); // Print piece name
+                } else {
+                    System.out.print("_ "); // Empty space
+                }
+            }
+            System.out.println(); // Move to the next row
+        }
     }
+
     
 }

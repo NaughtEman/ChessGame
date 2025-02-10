@@ -20,6 +20,7 @@ public class Tester {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        /*
         CoOrdinates cd = new CoOrdinates();
         
         System.out.println("For the Pawn");
@@ -62,7 +63,12 @@ public class Tester {
         
         King kg = new King(cd, true);
         kg.showAllowedMoves();
-        //b.toString();
+        //b.toString
+        */
+        
+        ChessBoard board = new ChessBoard();
+        
+        board.displayBoard();
         
     }
     
