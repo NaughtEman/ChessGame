@@ -67,5 +67,56 @@ public class Player {
     }
     
     
-      
+    public void movePiece(String name, String crdnts){
+        List<ChessPiece> subList = strToObject(name);
+        ChessPiece selectedPiece = null;
+        
+        CoOrdinates cd = new CoOrdinates(crdnts);
+        
+        for(ChessPiece temp : subList){
+            temp.movementLogic();
+            if(temp.getAllowedMoves().contains(cd)){
+                selectedPiece = temp;
+                board.removePiece(temp.getCordnts());
+                break;
+            }
+        }
+        
+        if (selectedPiece == null) {
+            System.out.println("Invalid move: No valid move found for " + name + " to " + crdnts);
+            return;
+        }
+        
+        selectedPiece.updateCordnts(cd);
+        
+        subList.clear();
+        
+        board.updateBoard(soldiers);
+    }
+
+    /**
+     * Gets the Chesspiece object with the same name
+     * @param name
+     * @return subList. This subList contains all chessPieces with the same name 
+     */
+    private List<ChessPiece> strToObject(String name) {
+        
+        List<ChessPiece> subList = new ArrayList<>();
+        
+        for(ChessPiece temp : soldiers){
+            
+            if(temp.getName().equalsIgnoreCase(name)){
+                subList.add(temp);
+            }
+        }
+        return subList;
+    }
+    
+    public void printSoldiers(){
+        for(ChessPiece temp : soldiers){
+            
+            System.out.println(temp.toString());
+        }
+        System.out.println();
+    }
 }

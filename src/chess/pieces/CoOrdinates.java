@@ -21,6 +21,22 @@ public class CoOrdinates {
         this.x = x;
         this.y = y;
     }
+    
+    // Takes the string coordinates 
+    public CoOrdinates(String t){
+        
+        char letter = Character.toUpperCase(t.charAt(0));
+        int number = 0;
+        
+        try {
+            number = Integer.parseInt(t.substring(1));
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        this.x = ALLOWEDALPHAS.indexOf(letter) +1;
+        this.y = number;  
+    }
 
     public CoOrdinates() {}
     
@@ -94,22 +110,6 @@ public class CoOrdinates {
     public boolean isOOB(int x, int y){
         return isOOB(x) || isOOB(y);
     }// close checkOutOfBounds(int x, int y)
-    
-    // Takes the string coordinates 
-    public boolean isOOB(String t){
-        if (t.length() < 2) return true;
-        
-        char letter = Character.toUpperCase(t.charAt(0));
-        int number;
-        
-        try {
-            number = Integer.parseInt(t.substring(1));
-        } catch (NumberFormatException e) {
-            return true;
-        }
-        
-        return isOOB(number) || !ALLOWEDALPHAS.contains(letter);
-    }// close checkOutOfBounds(int t)
     
     //Checks this co-ordinate
     public boolean isOOB(){

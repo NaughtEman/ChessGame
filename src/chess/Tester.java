@@ -72,6 +72,11 @@ public class Tester {
         Player pW = new Player(true, "White");
                 
         Player pB = new Player(false, "Black");
+        
+        board.displayBoard(); // Before move
+        //board.getBoard().clear();
+        pW.movePiece("Pawn", "B3"); // Make move
+        //pW.printSoldiers(); // After move
         board.displayBoard();
         
     }

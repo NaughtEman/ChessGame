@@ -37,13 +37,7 @@ public abstract class ChessPiece {
         return cordnts;
     }
 
-    // Update the chess piece co-ordinates
-    public void updateCordnts(CoOrdinates cordnts) {
-        this.cordnts = cordnts;
-        movementLogic();
-        // Use when incoporating AI or if performance becomes an issue. 
-        // new Thread(this::movementLogic).start(); 
-    }
+    
     
     // get chess piece name (rook,pawn e.t.c)
     public String getName() {
@@ -57,7 +51,7 @@ public abstract class ChessPiece {
 
     // returns a copy of the allowedMoves list
     public List<CoOrdinates> getAllowedMoves() {
-        return new ArrayList<>(allowedMoves);
+        return allowedMoves;
     }
     
     // Prints allowed moves
@@ -98,8 +92,16 @@ public abstract class ChessPiece {
         return isWhite;
     }
     
-    public void updateCordinate(CoOrdinates cd){
+    /*public void updateCordinate(CoOrdinates cd){
         cordnts.setCordnts(cd.getX(),cd.getY());
+    }*/
+    
+    // Update the chess piece co-ordinates
+    public void updateCordnts(CoOrdinates cordnts) {
+        this.cordnts = cordnts;
+        movementLogic();
+        // Use when incoporating AI or if performance becomes an issue. 
+        // new Thread(this::movementLogic).start(); 
     }
     
     public void deathNote(ChessPiece cp) {

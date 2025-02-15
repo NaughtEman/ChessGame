@@ -58,7 +58,6 @@ public class ChessBoard {
      * Bulk update of the board at the start of the game
      */
     public void updateBoard(List<ChessPiece> soldiers){
-        
         for(ChessPiece temp : soldiers){
             board.put(temp.getCordnts(), temp.getFullName());
         }
@@ -93,4 +92,9 @@ public class ChessBoard {
         System.out.println("  +-----------------------------------------------------------+");
 }
 
+    public Map<CoOrdinates, String> getBoard() {
+        return board;
+    }
+
+    
 }
