@@ -4,6 +4,7 @@
  */
 package chess;
 
+import chess.actors.Player;
 import chess.pieces.CoOrdinates;
 import chess.pieces.ChessPiece;
 import java.util.*;
@@ -54,6 +55,16 @@ public class ChessBoard {
     }
     
     /**
+     * Bulk update of the board at the start of the game
+     */
+    public void updateBoard(List<ChessPiece> soldiers){
+        
+        for(ChessPiece temp : soldiers){
+            board.put(temp.getCordnts(), temp.getFullName());
+        }
+    }
+    
+    /**
      * Removes a piece from a given coordinate.
      * @param cd The coordinate to clear.
      */
@@ -63,25 +74,23 @@ public class ChessBoard {
     
     /** 
      * Displays the board
-     */
+    */
     public void displayBoard() {
-        System.out.println("  A  B  C  D  E  F  G  H"); // Column labels
+        
+        System.out.println("    A       B       C       D       E       F       G       H"); // Column labels
+        System.out.println("  +-----------------------------------------------------------+");
 
-        for (int y = 8; y >= 1; y--) { // Looping from 8 to 1 (since chessboards are displayed top-down)
-            System.out.print(y + " "); // Row number at the start of each row
-
-            for (int x = 1; x <= 8; x++) {
-                CoOrdinates tempCD = new CoOrdinates(x, y);
-
-                if (board.containsKey(tempCD)) {
-                    System.out.print(board.get(tempCD) + " "); // Print piece name
-                } else {
-                    System.out.print("_ "); // Empty space
-                }
+        for (int row = 8; row >= 1; row--) {
+            System.out.print(row + " | "); // Row label
+            for (char col = 'A'; col <= 'H'; col++) {
+                CoOrdinates coord = new CoOrdinates(col - 'A' + 1, row);
+                String piece = board.getOrDefault(coord, " _"); // Get piece or empty
+                System.out.printf("%-8s", piece); // Format spacing evenly
             }
-            System.out.println(); // Move to the next row
+            System.out.println("|");
         }
-    }
 
-    
+        System.out.println("  +-----------------------------------------------------------+");
+}
+
 }

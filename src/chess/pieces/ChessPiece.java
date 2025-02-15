@@ -112,7 +112,7 @@ public abstract class ChessPiece {
     }
     
     public String getFullName(){
-        return String.format( isWhite ? "White" : "Black" + " " + getName());
+        return String.format( isWhite ? "W" + getName(): "B" + getName());
     }
 
     public abstract void movementLogic();

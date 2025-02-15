@@ -4,6 +4,7 @@
  */
 package chess;
 
+import chess.actors.Player;
 import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 
@@ -66,8 +67,11 @@ public class Tester {
         //b.toString
         */
         
-        ChessBoard board = new ChessBoard();
+        ChessBoard board = ChessBoard.getInstance();
         
+        Player pW = new Player(true, "White");
+                
+        Player pB = new Player(false, "Black");
         board.displayBoard();
         
     }
