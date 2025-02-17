@@ -79,6 +79,14 @@ public class Tester {
         //pW.printSoldiers(); // After move
         board.displayBoard();
         
+        pB.movePiece("Rook", "A3");
+        board.displayBoard();
+        
+        pB.movePiece("Rook", "B3");
+        board.displayBoard();
+        
+        pB.printVanquished();
+        
     }
     
 }

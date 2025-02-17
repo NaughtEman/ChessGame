@@ -22,6 +22,8 @@ public class Player {
     
     private List <ChessPiece> vanquished = new ArrayList<>();
     
+    private List <ChessPiece> fallenLegends = new ArrayList<>();
+    
     private static ChessBoard board = ChessBoard.getInstance();
 
     public Player(boolean isWhite, String pName) {
@@ -76,6 +78,11 @@ public class Player {
         for(ChessPiece temp : subList){
             temp.movementLogic();
             if(temp.getAllowedMoves().contains(cd)){
+                
+                if(!board.isFree(cd)){
+                    vanquished.add(board.getBoard().get(cd));
+                    board.getBoard().remove(cd);
+                }
                 selectedPiece = temp;
                 board.removePiece(temp.getCordnts());
                 break;
@@ -114,6 +121,22 @@ public class Player {
     
     public void printSoldiers(){
         for(ChessPiece temp : soldiers){
+            
+            System.out.println(temp.toString());
+        }
+        System.out.println();
+    }
+    
+    public void printVanquished(){
+        for(ChessPiece temp : vanquished){
+            
+            System.out.println(temp.toString());
+        }
+        System.out.println();
+    }
+    
+    public void printFallen(){
+        for(ChessPiece temp : fallenLegends){
             
             System.out.println(temp.toString());
         }

@@ -17,7 +17,7 @@ import java.util.concurrent.*;
 public class ChessBoard {
     
     // Holds all chess pieces name (color and name of chess piece) and thier coordinates
-    private Map<CoOrdinates, String> board = new ConcurrentHashMap();
+    private Map<CoOrdinates, ChessPiece> board = new ConcurrentHashMap();
     
     private static ChessBoard instance;
     
@@ -48,7 +48,7 @@ public class ChessBoard {
      */
     public synchronized boolean placePiece(ChessPiece piece, CoOrdinates cd) {
         if (isFree(cd)) {
-            board.put(cd, piece.getFullName());
+            board.put(cd, piece);
             return true;
         }
         return false; // Space is occupied
@@ -59,7 +59,7 @@ public class ChessBoard {
      */
     public void updateBoard(List<ChessPiece> soldiers){
         for(ChessPiece temp : soldiers){
-            board.put(temp.getCordnts(), temp.getFullName());
+            board.put(temp.getCordnts(), temp);
         }
     }
     
@@ -83,8 +83,10 @@ public class ChessBoard {
             System.out.print(row + " | "); // Row label
             for (char col = 'A'; col <= 'H'; col++) {
                 CoOrdinates coord = new CoOrdinates(col - 'A' + 1, row);
-                String piece = board.getOrDefault(coord, " _"); // Get piece or empty
-                System.out.printf("%-8s", piece); // Format spacing evenly
+                ChessPiece piece = board.get(coord);
+                String pieceSymbol = (piece != null) ? piece.getFullName() : " _";
+                System.out.printf("%-8s", pieceSymbol);
+
             }
             System.out.println("|");
         }
@@ -92,7 +94,7 @@ public class ChessBoard {
         System.out.println("  +-----------------------------------------------------------+");
 }
 
-    public Map<CoOrdinates, String> getBoard() {
+    public Map<CoOrdinates, ChessPiece> getBoard() {
         return board;
     }
 
