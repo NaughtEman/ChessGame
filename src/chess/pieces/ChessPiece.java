@@ -9,6 +9,7 @@ package chess.pieces;
  * @author dosum
  */
 
+import chess.actors.Player;
 import java.util.*;
 
 public abstract class ChessPiece {
@@ -20,6 +21,8 @@ public abstract class ChessPiece {
     boolean isWhite = true;
     
     private String name;
+    
+    private Player player;
     
     private ChessPiece capturedBy;
     
@@ -37,7 +40,13 @@ public abstract class ChessPiece {
         return cordnts;
     }
 
-    
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
     
     // get chess piece name (rook,pawn e.t.c)
     public String getName() {
@@ -115,6 +124,10 @@ public abstract class ChessPiece {
     
     public String getFullName(){
         return String.format( isWhite ? "W" + getName(): "B" + getName());
+    }
+    
+    public void goToValhalla(){
+        player.quarterMaster(this);
     }
 
     public abstract void movementLogic();

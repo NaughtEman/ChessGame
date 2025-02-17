@@ -22,7 +22,7 @@ public class Player {
     
     private List <ChessPiece> vanquished = new ArrayList<>();
     
-    private List <ChessPiece> fallenLegends = new ArrayList<>();
+    private List <ChessPiece> valhalla = new ArrayList<>();
     
     private static ChessBoard board = ChessBoard.getInstance();
 
@@ -59,6 +59,8 @@ public class Player {
 
         // Place King
         soldiers.add(new King(new CoOrdinates(5, mainRow), isWhite));
+        
+        linkPiecetoPlayer();
         board.updateBoard(soldiers);
     }
     
@@ -81,6 +83,7 @@ public class Player {
                 
                 if(!board.isFree(cd)){
                     vanquished.add(board.getBoard().get(cd));
+                    board.getBoard().get(cd).goToValhalla();
                     board.getBoard().remove(cd);
                 }
                 selectedPiece = temp;
@@ -119,6 +122,16 @@ public class Player {
         return subList;
     }
     
+    /**
+     * Moves a dead player  
+     * @param piece 
+     */
+    public void quarterMaster(ChessPiece piece){
+        soldiers.remove(piece);
+        valhalla.add(piece);
+        
+    }
+    
     public void printSoldiers(){
         for(ChessPiece temp : soldiers){
             
@@ -136,10 +149,16 @@ public class Player {
     }
     
     public void printFallen(){
-        for(ChessPiece temp : fallenLegends){
+        for(ChessPiece temp : valhalla){
             
             System.out.println(temp.toString());
         }
         System.out.println();
+    }
+
+    private void linkPiecetoPlayer() {
+        for(ChessPiece temp : soldiers){
+            temp.setPlayer(this);
+        }
     }
 }

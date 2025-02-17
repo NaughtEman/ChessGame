@@ -85,7 +85,13 @@ public class Tester {
         pB.movePiece("Rook", "B3");
         board.displayBoard();
         
+        System.out.print("Black player vanquished ");
         pB.printVanquished();
+        System.out.println();
+        
+        System.out.print("White player: We shall avenge ");
+        pW.printFallen();
+        System.out.println();
         
     }
     
