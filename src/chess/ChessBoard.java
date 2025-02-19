@@ -97,6 +97,13 @@ public class ChessBoard {
     public Map<CoOrdinates, ChessPiece> getBoard() {
         return board;
     }
+    
+    // TODO: Implement cordnt movement 
+    public void movePiece(CoOrdinates current, CoOrdinates destination){
+        
+        board.get(current);
+        
+    }
 
     
 }

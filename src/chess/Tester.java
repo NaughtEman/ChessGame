@@ -72,7 +72,7 @@ public class Tester {
         Player pW = new Player(true, "White");
                 
         Player pB = new Player(false, "Black");
-        
+        /*
         board.displayBoard(); // Before move
         //board.getBoard().clear();
         pW.movePiece("Pawn", "B3"); // Make move
@@ -91,6 +91,28 @@ public class Tester {
         
         System.out.print("White player: We shall avenge ");
         pW.printFallen();
+        System.out.println(); */
+        
+       // pW.strToObject("Pawn");
+        //board.displayBoard();
+        
+        pW.movePiece("Pawn", "B3"); // Make move
+        
+        pB.movePiece("Rook", "A3");
+        
+        pB.movePiece("Rook", "B3");
+        board.displayBoard();
+        
+        pW.movePiece("Pawn", "B3");
+        board.displayBoard();
+        
+       
+        System.out.print("White player vanquished ");
+        pW.printVanquished();
+        System.out.println();
+        
+        System.out.print("Black player: We shall avenge ");
+        pB.printFallen();
         System.out.println();
         
     }

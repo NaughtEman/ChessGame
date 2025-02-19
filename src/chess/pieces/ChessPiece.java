@@ -29,11 +29,10 @@ public abstract class ChessPiece {
     private List<CoOrdinates> allowedMoves = new ArrayList<>();
     
     public ChessPiece(String name, CoOrdinates initialPosition, boolean isWhite) {
-    this.name = name;
-    this.cordnts = initialPosition; 
-    this.isWhite = isWhite;
-    movementLogic();
-}
+        this.name = name;
+        this.cordnts = initialPosition; 
+        this.isWhite = isWhite;
+    }
 
     // get its current co-ordinates
     public CoOrdinates getCordnts() {
@@ -83,6 +82,9 @@ public abstract class ChessPiece {
     // Adds a coordinate to the allowed moves list if its not Out Of Bounds
     public void addAllowedMove(CoOrdinates cd) {
         if (!cd.isOOB() && !allowedMoves.contains(cd)) {
+            /*if(!player.comradeOccupied(cd)){
+                this.allowedMoves.add(cd);
+            }*/
             this.allowedMoves.add(cd);
         }
     }
@@ -100,10 +102,6 @@ public abstract class ChessPiece {
     public boolean getTeamColour() {
         return isWhite;
     }
-    
-    /*public void updateCordinate(CoOrdinates cd){
-        cordnts.setCordnts(cd.getX(),cd.getY());
-    }*/
     
     // Update the chess piece co-ordinates
     public void updateCordnts(CoOrdinates cordnts) {
@@ -135,5 +133,33 @@ public abstract class ChessPiece {
     @Override
     public String toString() {
         return name + " at " + cordnts.getCordnts() + " [" + (isWhite ? "White" : "Black") + "]";
-    } 
+    }
+    
+    public boolean sameCD(CoOrdinates cd){
+        boolean same = false;
+        
+        int v = 2;
+        
+        if(this.getCordnts().getX() == cd.getX()){
+            v -=1;
+        }
+        
+        if(this.getCordnts().getY() == cd.getY()){
+            v -=1;
+        }
+        
+        if(v != 2){
+            same = true;
+        }
+        
+        return same;
+    }
+    
+    public void printAllowedMoves(){
+        System.out.println(getFullName() + " can move to:");
+        for(CoOrdinates temp : allowedMoves){
+            System.out.print(temp.getCordnts());
+        }
+        System.out.println();
+    }
 }

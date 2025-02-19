@@ -12,6 +12,7 @@ public class King extends ChessPiece{
 
     public King( CoOrdinates initialPosition, boolean isWhite) {
         super("King", initialPosition, isWhite);
+        movementLogic();
     }
 
     @Override

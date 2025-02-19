@@ -12,6 +12,7 @@ public class Rook extends ChessPiece{
 
      public Rook(CoOrdinates initialPosition, boolean isWhite) {
         super("Rook", initialPosition, isWhite);
+        movementLogic();
     }
      
      /** Calculates the movement logic for the Rook

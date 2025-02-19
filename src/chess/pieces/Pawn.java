@@ -4,16 +4,22 @@
  */
 package chess.pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author dosum
  */
 public class Pawn extends ChessPiece{
     
+    private List<CoOrdinates> allowedPawnCapture;
     boolean isFirstMove = true;
 
      public Pawn(CoOrdinates initialPosition, boolean isWhite) {
         super("Pawn", initialPosition, isWhite);
+        this.allowedPawnCapture = new ArrayList<>();
+        movementLogic();
     }
      
      @Override
@@ -21,7 +27,7 @@ public class Pawn extends ChessPiece{
     public void updateCordnts(CoOrdinates cordnts) {
         super.updateCordnts(cordnts);
         isFirstMove = false;
-        
+        allowedPawnCapture = new ArrayList<>();
     }
 
      /** Calculates the movement logic for the Rook
@@ -41,9 +47,29 @@ public class Pawn extends ChessPiece{
             addAllowedMove(getCordnts().moveCustom(0, 2* d));
         }
 
-        // Capture moves: Diagonal left and right
-        //addAllowedMove(current.moveVertical(direction, -1));
-        //addAllowedMove(current.moveVertical(direction, 1));
+        captureLogic(d);
     }
     
+    public void captureLogic(int d){
+        
+        if (allowedPawnCapture == null) {
+            System.out.println("Error: allowedPawnCapture is NULL! Reinitializing...");
+            //allowedPawnCapture = new ArrayList<>(); // Avoid null pointer exceptions
+        }
+        
+        //allowedPawnCapture.clear();
+        // Capture moves: Diagonal left and right
+        allowedPawnCapture.add(getCordnts().moveCustom(1, d));
+        allowedPawnCapture.add(getCordnts().moveCustom(-1, d));
+    }
+
+    public boolean inCaptureRange(CoOrdinates cd) {
+        boolean canCapture = false;
+        
+        if(allowedPawnCapture.contains(cd)){
+            canCapture = true;
+        }
+        
+        return canCapture; 
+    }
 }

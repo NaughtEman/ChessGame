@@ -12,6 +12,7 @@ public class Knight extends ChessPiece{
 
     public Knight(CoOrdinates initialPosition, boolean isWhite) {
         super("Knight", initialPosition, isWhite);
+        movementLogic();
     }
 
     @Override

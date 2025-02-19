@@ -12,6 +12,7 @@ public class Bishop extends ChessPiece{
 
     public Bishop(CoOrdinates initialPosition, boolean isWhite) {
         super("Bishop", initialPosition, isWhite);
+        movementLogic();
     }
 
     @Override
