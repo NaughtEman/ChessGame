@@ -4,7 +4,8 @@
  */
 package chess;
 
-import chess.actors.Player;
+import chess.actors.Commander;
+import chess.actors.Tactician;
 import chess.pieces.CoOrdinates;
 import chess.pieces.ChessPiece;
 import java.util.*;
@@ -98,12 +99,22 @@ public class ChessBoard {
         return board;
     }
     
-    // TODO: Implement cordnt movement 
-    public void movePiece(CoOrdinates current, CoOrdinates destination){
-        
-        board.get(current);
-        
-    }
-
+    // TODO: Implement cordnt movement
     
+    /**
+    * Moves a piece from one location to another if the move is valid.
+    * @param current The current location of the piece.
+    * @param destination The destination to move the selected piece.
+    * @return true if the move was successful, false otherwise.
+    */
+   public void movePiece(CoOrdinates current, CoOrdinates destination) {
+       ChessPiece piece = board.get(current);
+
+       if (piece == null) {
+           System.out.println("No piece found at " + current);
+       }
+
+       Tactician.movePiece(piece, destination);
+   }
+     
 }

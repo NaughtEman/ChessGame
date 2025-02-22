@@ -4,7 +4,7 @@
  */
 package chess;
 
-import chess.actors.Player;
+import chess.actors.Commander;
 import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 
@@ -69,9 +69,9 @@ public class Tester {
         
         ChessBoard board = ChessBoard.getInstance();
         
-        Player pW = new Player(true, "White");
+        Commander pW = new Commander(true, "White");
                 
-        Player pB = new Player(false, "Black");
+        Commander pB = new Commander(false, "Black");
         /*
         board.displayBoard(); // Before move
         //board.getBoard().clear();
@@ -103,7 +103,11 @@ public class Tester {
         pB.movePiece("Rook", "B3");
         board.displayBoard();
         
-        pW.movePiece("Pawn", "B3");
+        CoOrdinates current = new CoOrdinates("A2");
+        CoOrdinates dest = new CoOrdinates("B3");
+        
+        board.movePiece(current, dest);
+       // pW.movePiece("Pawn", "B3");
         board.displayBoard();
         
        

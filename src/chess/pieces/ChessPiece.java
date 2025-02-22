@@ -9,7 +9,7 @@ package chess.pieces;
  * @author dosum
  */
 
-import chess.actors.Player;
+import chess.actors.Commander;
 import java.util.*;
 
 public abstract class ChessPiece {
@@ -22,9 +22,9 @@ public abstract class ChessPiece {
     
     private String name;
     
-    private Player player;
+    private Commander player;
     
-    private ChessPiece capturedBy;
+    private String capturedBy;
     
     private List<CoOrdinates> allowedMoves = new ArrayList<>();
     
@@ -39,11 +39,11 @@ public abstract class ChessPiece {
         return cordnts;
     }
 
-    public Player getPlayer() {
+    public Commander getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(Commander player) {
         this.player = player;
     }
     
@@ -112,11 +112,11 @@ public abstract class ChessPiece {
     }
     
     public void deathNote(ChessPiece cp) {
-        this.capturedBy = cp;
+        this.capturedBy = cp.getFullName();
         this.isFree = false;   
     }
     
-    public ChessPiece getCapturedBy() {
+    public String getCapturedBy() {
         return capturedBy;
     }
     
@@ -158,7 +158,7 @@ public abstract class ChessPiece {
     public void printAllowedMoves(){
         System.out.println(getFullName() + " can move to:");
         for(CoOrdinates temp : allowedMoves){
-            System.out.print(temp.getCordnts());
+            System.out.print("[" + temp.getCordnts() + "]," + " ");
         }
         System.out.println();
     }

@@ -12,7 +12,7 @@ import java.util.*;
 import chess.*;
 import chess.pieces.*;
 
-public class Player {
+public class Commander {
     
     /** Indicates whether the player is controlling the white pieces (true)
      * or black (false). */
@@ -40,7 +40,7 @@ public class Player {
      * @param isWhite true if the player is playing as white, false for black.
      * @param pName the name of the player.
      */
-    public Player(boolean isWhite, String pName) {
+    public Commander(boolean isWhite, String pName) {
         this.isWhite = isWhite;
         this.pName = pName;
         setPieces();
@@ -82,90 +82,35 @@ public class Player {
         board.updateBoard(soldiers);
     }
     
-    /**
-     * Captures an opponent's piece by adding it to the vanquished list
-     * and removing it from the board.
-     * 
-     * @param piece the opponent's piece to be captured.
-     */
-    public void capturePiece(ChessPiece piece) {
-        vanquished.add(piece);
-        board.removePiece(piece.getCordnts()); // Ensures it's no longer on the board
-    }
     
-    /**
-     * Moves a chess piece to a new position on the board.
-     * If an opponent's piece occupies the destination, it is captured.
-     * 
-     * @param name the name of the chess piece to move.
-     * @param crdnts the target coordinates for the move.
-     */
     public void movePiece(String name, String crdnts) {
-        List<ChessPiece> subList = strToObject(name);
-        ChessPiece selectedPiece = null;
+            List<ChessPiece> subList = strToObject(name);
+            CoOrdinates targetCoords = new CoOrdinates(crdnts);
+            ChessPiece selectedPiece = null;
 
-        CoOrdinates cd = new CoOrdinates(crdnts);
-
-        for (ChessPiece temp : subList) {
-            temp.movementLogic();
-            
-            // Special capture logic for pawns
-            if (temp instanceof Pawn) {
-                Pawn pawn = (Pawn) temp;
-                
-                pawn.printAllowedMoves();
-
-                
-                // If the target square is occupied
-                if (!board.isFree(cd)) {
-                    
-                    if (pawn.inCaptureRange(cd)) { // Ensure pawn captures diagonally
-                        capturePiece(cd);
-                        selectedPiece = temp;
-                        board.removePiece(temp.getCordnts());
-                        break;
-                    } else {
-                        continue; // Skip to next piece if pawn cannot capture
-                    }
+            for (ChessPiece piece : subList) {
+                if (Tactician.movePiece(piece, targetCoords)) {
+                    selectedPiece = piece;
+                    break;
                 }
             }
 
-            // If the piece can move to this coordinate
-            if (temp.getAllowedMoves().contains(cd)) {
-                temp.printAllowedMoves();
-                // If the target square is occupied
-                if (!board.isFree(cd)) {
-                    // Capture logic for non-pawn pieces
-                    capturePiece(cd);
-                }
-
-                // Standard move logic
-                selectedPiece = temp;
-                board.removePiece(temp.getCordnts());
-                break;
+            if (selectedPiece == null) {
+                System.out.println("Invalid move: No valid move found for " + name + " to " + crdnts);
             }
         }
 
-        if (selectedPiece == null) {
-            System.out.println("Invalid move: No valid move found for " + name + " to " + crdnts);
-            return;
-        }
-
-        selectedPiece.updateCordnts(cd);
-        subList.clear();
-        board.updateBoard(soldiers);
+    public List<ChessPiece> getSoldiers() {
+        return soldiers;
     }
 
-    /**
-     * Captures the piece at the given coordinates.
-     */
-    private void capturePiece(CoOrdinates cd) {
-        ChessPiece targetPiece = board.getBoard().get(cd);
-        vanquished.add(targetPiece);
-        targetPiece.goToValhalla();
-        board.getBoard().remove(cd);
+    public List<ChessPiece> getVanquished() {
+        return vanquished;
     }
 
+    public List<ChessPiece> getValhalla() {
+        return valhalla;
+    }
 
     /**
      * Retrieves a list of chess pieces matching the specified name.
@@ -183,15 +128,7 @@ public class Player {
                 subList.add(temp);
             }
         }
-        
-        /*for(ChessPiece temp : subList){
-            
-            System.out.println(temp.toString());
-        }
-        System.out.println();*/
-        return subList;
-        
-        
+        return subList; 
     }
     
     /**
@@ -203,7 +140,6 @@ public class Player {
     public void quarterMaster(ChessPiece piece){
         soldiers.remove(piece);
         valhalla.add(piece);
-        
     }
     
     /**
