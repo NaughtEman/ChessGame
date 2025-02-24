@@ -119,6 +119,21 @@ public class Tester {
         pB.printFallen();
         System.out.println();
         
+        
+        current = new CoOrdinates("H1");
+        dest = new CoOrdinates("H4");
+        board.movePiece(current, dest);
+       // pW.movePiece("Pawn", "B3");
+        board.displayBoard();
+        
+        current = new CoOrdinates("A1");
+        dest = new CoOrdinates("B1");
+        board.movePiece(current, dest);
+       // pW.movePiece("Pawn", "B3");
+        board.displayBoard();
+        
+        
+       
     }
     
 }

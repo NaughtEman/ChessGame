@@ -162,4 +162,14 @@ public abstract class ChessPiece {
         }
         System.out.println();
     }
+    
+    /**
+    * Checks if the piece is on the same team as the given color.
+    * @param isWhite the boolean representing the player's team color
+    * @return true if the piece is on the same team, false otherwise
+    */
+    public boolean onSameTeam(boolean team) {
+        return this.getTeamColour() == team;
+    }
+
 }

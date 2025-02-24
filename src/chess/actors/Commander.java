@@ -16,7 +16,7 @@ public class Commander {
     
     /** Indicates whether the player is controlling the white pieces (true)
      * or black (false). */
-    boolean isWhite;
+    private boolean isWhite;
     
     /** The name of the player. */
     String pName;
@@ -84,21 +84,21 @@ public class Commander {
     
     
     public void movePiece(String name, String crdnts) {
-            List<ChessPiece> subList = strToObject(name);
-            CoOrdinates targetCoords = new CoOrdinates(crdnts);
-            ChessPiece selectedPiece = null;
+        List<ChessPiece> subList = strToObject(name);
+        CoOrdinates targetCoords = new CoOrdinates(crdnts);
+        ChessPiece selectedPiece = null;
 
-            for (ChessPiece piece : subList) {
-                if (Tactician.movePiece(piece, targetCoords)) {
-                    selectedPiece = piece;
-                    break;
-                }
-            }
-
-            if (selectedPiece == null) {
-                System.out.println("Invalid move: No valid move found for " + name + " to " + crdnts);
+        for (ChessPiece piece : subList) {
+            if (Tactician.check(piece, targetCoords, this)) {
+                selectedPiece = piece;
+                break;
             }
         }
+
+        if (selectedPiece == null) {
+            System.out.println("Invalid move: No valid move found for " + name + " to " + crdnts);
+        }
+    }
 
     public List<ChessPiece> getSoldiers() {
         return soldiers;
@@ -199,5 +199,8 @@ public class Commander {
         }
         return false;    
     }
-    
+
+    public boolean getIsWhite() {
+        return isWhite;
+    }
 }

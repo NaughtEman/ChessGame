@@ -114,7 +114,7 @@ public class ChessBoard {
            System.out.println("No piece found at " + current);
        }
 
-       Tactician.movePiece(piece, destination);
+       Tactician.check(piece, destination, piece.getPlayer());
    }
      
 }
