@@ -103,18 +103,22 @@ public class ChessBoard {
     
     /**
     * Moves a piece from one location to another if the move is valid.
-    * @param current The current location of the piece.
-    * @param destination The destination to move the selected piece.
+    * @param curr The current location of the piece.
+    * @param dest The destination to move the selected piece.
     * @return true if the move was successful, false otherwise.
     */
-   public void movePiece(CoOrdinates current, CoOrdinates destination) {
+   public void movePiece(String cur, String dest) {
+       
+       CoOrdinates current = new CoOrdinates(cur);
+       CoOrdinates destination = new CoOrdinates(dest);
+       
        ChessPiece piece = board.get(current);
 
        if (piece == null) {
            System.out.println("No piece found at " + current);
        }
 
-       Tactician.check(piece, destination, piece.getPlayer());
+       Tactician.movePiece(piece, destination);
    }
      
 }

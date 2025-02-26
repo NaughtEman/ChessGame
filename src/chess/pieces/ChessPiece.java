@@ -9,6 +9,7 @@ package chess.pieces;
  * @author dosum
  */
 
+import chess.ChessBoard;
 import chess.actors.Commander;
 import java.util.*;
 
@@ -21,8 +22,6 @@ public abstract class ChessPiece {
     boolean isWhite = true;
     
     private String name;
-    
-    private Commander player;
     
     private String capturedBy;
     
@@ -37,14 +36,6 @@ public abstract class ChessPiece {
     // get its current co-ordinates
     public CoOrdinates getCordnts() {
         return cordnts;
-    }
-
-    public Commander getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Commander player) {
-        this.player = player;
     }
     
     // get chess piece name (rook,pawn e.t.c)
@@ -80,14 +71,33 @@ public abstract class ChessPiece {
     } // close getCanMoveTo()
 
     // Adds a coordinate to the allowed moves list if its not Out Of Bounds
+    
+    /**
+     * 
+     * @param cd. Co-ordinate to be added
+     */
     public void addAllowedMove(CoOrdinates cd) {
-        if (!cd.isOOB() && !allowedMoves.contains(cd)) {
-            /*if(!player.comradeOccupied(cd)){
-                this.allowedMoves.add(cd);
-            }*/
-            this.allowedMoves.add(cd);
+        ChessBoard board = ChessBoard.getInstance();
+
+        // Prevent out-of-bounds or duplicate moves
+        if (cd.isOOB() || allowedMoves.contains(cd)) {
+            return;
         }
+
+        // Check if the square is occupied
+        ChessPiece occupyingPiece = board.getBoard().get(cd);
+        if (occupyingPiece != null) {
+            // Allow capturing enemy pieces but stop movement beyond this point
+            if (!this.onSameTeam(occupyingPiece.getTeamColour())) {
+                this.allowedMoves.add(cd);
+            }
+            return; // Stop adding moves beyond this point
+        }
+
+        // If the square is free, add it as a valid move
+        this.allowedMoves.add(cd);
     }
+
     
     // Removes a coordinate from the allowed moves list
     public void removeAllowedMove(CoOrdinates cd) {
@@ -124,8 +134,8 @@ public abstract class ChessPiece {
         return String.format( isWhite ? "W" + getName(): "B" + getName());
     }
     
-    public void goToValhalla(){
-        player.quarterMaster(this);
+    public void goToValhalla(Commander commander){
+        commander.quarterMaster(this);
     }
 
     public abstract void movementLogic();
@@ -171,5 +181,4 @@ public abstract class ChessPiece {
     public boolean onSameTeam(boolean team) {
         return this.getTeamColour() == team;
     }
-
 }

@@ -35,21 +35,6 @@ public class Tactician {
 
         return false;
     }
-    
-    public static boolean check(ChessPiece piece, CoOrdinates targetCoords, Commander cmdr) {
-        ChessPiece targetPiece = board.getBoard().get(targetCoords);
-        
-        if (targetPiece == null) {
-            return movePiece(piece, targetCoords);  // If empty, just move
-        }
-
-        if (!targetPiece.onSameTeam(cmdr.getIsWhite())) {
-            return executeCapture(piece, targetCoords);
-        }
-
-        System.out.println("Occupied by you");
-        return false;
-    }
 
     private static boolean handlePawnMove(Pawn pawn, CoOrdinates targetCoords) {
         if (pawn == null) return false;
@@ -85,20 +70,31 @@ public class Tactician {
 
     private static boolean executeCapture(ChessPiece attacker, CoOrdinates targetCoords) {
         ChessPiece targetPiece = board.getBoard().get(targetCoords);
-        if (targetPiece == null) return false; // Should never happen, but defensive check
+        GameManager gm = GameManager.getInstance();
 
+        if (targetPiece == null) { 
+            System.err.println("Error: Tried to capture a piece at " + targetCoords + " but no piece was found.");
+            return false; // Defensive check
+        }
+
+        // Retrieve the commanders
+        Commander attackingCommander = gm.getPlayer(attacker.getTeamColour());
+        Commander defendingCommander = gm.getPlayer(targetPiece.getTeamColour());
+
+        // Mark the captured piece
         targetPiece.deathNote(attacker);
+        attackingCommander.getVanquished().add(targetPiece);
+        targetPiece.goToValhalla(defendingCommander);
 
-        Commander commander = attacker.getPlayer();
-        commander.getVanquished().add(targetPiece);
-        targetPiece.goToValhalla();
+        // Remove captured piece from the board
         board.getBoard().remove(targetCoords);
 
-        // Move attacker to captured piece’s position
-        board.removePiece(attacker.getCordnts());
+        // Move attacker to the captured piece’s position
+        board.removePiece(attacker.getCordnts());  
         attacker.updateCordnts(targetCoords);
         board.placePiece(attacker, targetCoords);
 
         return true;
     }
+
 }

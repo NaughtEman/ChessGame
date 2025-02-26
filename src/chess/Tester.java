@@ -5,6 +5,7 @@
 package chess;
 
 import chess.actors.Commander;
+import chess.actors.GameManager;
 import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 
@@ -69,71 +70,21 @@ public class Tester {
         
         ChessBoard board = ChessBoard.getInstance();
         
-        Commander pW = new Commander(true, "White");
+        GameManager gm = GameManager.getInstance();
+        
+        Commander pW = gm.getPlayer(true);
                 
-        Commander pB = new Commander(false, "Black");
-        /*
-        board.displayBoard(); // Before move
-        //board.getBoard().clear();
-        pW.movePiece("Pawn", "B3"); // Make move
-        //pW.printSoldiers(); // After move
+        Commander pB = gm.getPlayer(false);
         board.displayBoard();
         
-        pB.movePiece("Rook", "A3");
+        board.movePiece("A2", "A4");
         board.displayBoard();
         
-        pB.movePiece("Rook", "B3");
+        board.movePiece("A1", "A3");
         board.displayBoard();
         
-        System.out.print("Black player vanquished ");
-        pB.printVanquished();
-        System.out.println();
-        
-        System.out.print("White player: We shall avenge ");
-        pW.printFallen();
-        System.out.println(); */
-        
-       // pW.strToObject("Pawn");
-        //board.displayBoard();
-        
-        pW.movePiece("Pawn", "B3"); // Make move
-        
-        pB.movePiece("Rook", "A3");
-        
-        pB.movePiece("Rook", "B3");
+        board.movePiece("A3", "H3");
         board.displayBoard();
-        
-        CoOrdinates current = new CoOrdinates("A2");
-        CoOrdinates dest = new CoOrdinates("B3");
-        
-        board.movePiece(current, dest);
-       // pW.movePiece("Pawn", "B3");
-        board.displayBoard();
-        
-       
-        System.out.print("White player vanquished ");
-        pW.printVanquished();
-        System.out.println();
-        
-        System.out.print("Black player: We shall avenge ");
-        pB.printFallen();
-        System.out.println();
-        
-        
-        current = new CoOrdinates("H1");
-        dest = new CoOrdinates("H4");
-        board.movePiece(current, dest);
-       // pW.movePiece("Pawn", "B3");
-        board.displayBoard();
-        
-        current = new CoOrdinates("A1");
-        dest = new CoOrdinates("B1");
-        board.movePiece(current, dest);
-       // pW.movePiece("Pawn", "B3");
-        board.displayBoard();
-        
-        
-       
     }
     
 }

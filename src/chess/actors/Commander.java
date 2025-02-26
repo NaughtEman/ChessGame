@@ -40,9 +40,8 @@ public class Commander {
      * @param isWhite true if the player is playing as white, false for black.
      * @param pName the name of the player.
      */
-    public Commander(boolean isWhite, String pName) {
+    public Commander(boolean isWhite) {
         this.isWhite = isWhite;
-        this.pName = pName;
         setPieces();
     }
     
@@ -77,8 +76,7 @@ public class Commander {
 
         // Place King
         soldiers.add(new King(new CoOrdinates(5, mainRow), isWhite));
-        
-        linkPiecetoPlayer();
+    
         board.updateBoard(soldiers);
     }
     
@@ -89,7 +87,7 @@ public class Commander {
         ChessPiece selectedPiece = null;
 
         for (ChessPiece piece : subList) {
-            if (Tactician.check(piece, targetCoords, this)) {
+            if (Tactician.movePiece(piece, targetCoords)) {
                 selectedPiece = piece;
                 break;
             }
@@ -173,16 +171,6 @@ public class Commander {
             System.out.println(temp.toString());
         }
         System.out.println();
-    }
-
-    /**
-     * Links each piece in the player's army to this Player object.
-     * This ensures that each chess piece knows which player it belongs to.
-     */
-    private void linkPiecetoPlayer() {
-        for(ChessPiece temp : soldiers){
-            temp.setPlayer(this);
-        }
     }
 
     /**
