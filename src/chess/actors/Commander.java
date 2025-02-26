@@ -12,7 +12,7 @@ import java.util.*;
 import chess.*;
 import chess.pieces.*;
 
-public class Commander {
+public class Commander { 
     
     /** Indicates whether the player is controlling the white pieces (true)
      * or black (false). */
@@ -191,4 +191,21 @@ public class Commander {
     public boolean getIsWhite() {
         return isWhite;
     }
+    
+      /**
+     * Sets the King to captured and notifies the GameManager
+     */
+    public void surrender() {
+        if (!soldiers.isEmpty()) {
+            ChessPiece king = soldiers.getLast();
+            if (king instanceof King) {
+                ((King) king).captured(); // Call the captured method on the King
+            } else {
+                System.out.println("Error: The last soldier is not the King.");
+            }
+        } else {
+            System.out.println("No soldiers remaining to surrender.");
+        }
+    }
+
 }

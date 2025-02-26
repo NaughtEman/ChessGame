@@ -4,6 +4,9 @@
  */
 package chess.pieces;
 
+import chess.actors.GameEndListener;
+import chess.actors.GameManager;
+
 /**
  *
  * @author dosum
@@ -25,5 +28,11 @@ public class King extends ChessPiece{
         for (int[] move : moves) {
             addAllowedMove(getCordnts().moveCustom(move[0], move[1]));
         }
+    }
+    
+     @Override
+    public void captured() {
+        super.captured(); // Call the base method if necessary
+        GameManager.getInstance().onGameEnd(this.getTeamColour() ? "Black" : "White");
     }
 }

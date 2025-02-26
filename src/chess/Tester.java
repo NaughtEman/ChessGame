@@ -77,14 +77,9 @@ public class Tester {
         Commander pB = gm.getPlayer(false);
         board.displayBoard();
         
-        board.movePiece("A2", "A4");
-        board.displayBoard();
+        pB.surrender();
         
-        board.movePiece("A1", "A3");
-        board.displayBoard();
         
-        board.movePiece("A3", "H3");
-        board.displayBoard();
     }
     
 }

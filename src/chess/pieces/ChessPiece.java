@@ -123,7 +123,11 @@ public abstract class ChessPiece {
     
     public void deathNote(ChessPiece cp) {
         this.capturedBy = cp.getFullName();
-        this.isFree = false;   
+        captured();   
+    }
+
+    public void captured() {
+        this.isFree = false;
     }
     
     public String getCapturedBy() {

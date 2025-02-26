@@ -8,9 +8,11 @@ package chess.actors;
  *
  * @author dosum
  */
-public class GameManager {
+public class GameManager implements GameEndListener{
     
     private static final GameManager instance = new GameManager();
+    private boolean gameRunning = true;
+    
     private final Commander whitePlayer = new Commander(true);
     private final Commander blackPlayer = new Commander(false);
 
@@ -22,6 +24,17 @@ public class GameManager {
 
     public Commander getPlayer(boolean isWhite) {
         return isWhite ? whitePlayer : blackPlayer;
+    }
+    
+    @Override
+    public void onGameEnd(String winner) {
+        gameRunning = false;
+        System.out.println("Game Over! " + winner + " wins!");
+        // You could also implement GUI updates or stop the game loop here.
+    }
+
+    public boolean isGameRunning() {
+        return gameRunning;
     }
     
 }
