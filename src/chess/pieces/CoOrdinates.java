@@ -21,21 +21,35 @@ public class CoOrdinates {
         this.x = x;
         this.y = y;
     }
-    
-    // Takes the string coordinates 
-    public CoOrdinates(String t){
-        
+ 
+    /**
+     * Constructs coordinates from a string like "A1", "C3", etc.
+     * 
+     * @param t The coordinate string.
+     * @throws IllegalArgumentException if the input is invalid.
+     */
+    public CoOrdinates(String t) {
+        if (t == null || t.length() != 2) {
+            throw new IllegalArgumentException("Invalid Co-Ordinates no length");
+        }
+
         char letter = Character.toUpperCase(t.charAt(0));
-        int number = 0;
-        
+        int number;
+
         try {
             number = Integer.parseInt(t.substring(1));
         } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException("Invalid Y Co-Ordinates");
         }
-        
-        this.x = ALLOWEDALPHAS.indexOf(letter) +1;
-        this.y = number;  
+
+        int xValue = ALLOWEDALPHAS.indexOf(letter) + 1;
+
+        if (!isOOB(xValue, number)) {
+            this.x = xValue;
+            this.y = number;
+        } else {
+            throw new IllegalArgumentException("Invalid Co-Ordinates");
+        }
     }
 
     public CoOrdinates() {}
@@ -106,7 +120,12 @@ public class CoOrdinates {
         return(t < 1 || t > 8);
     }// close checkOutOfBounds(int t)
 
-    // Takes in int x and y coordinates e.g 2,1 and checks for out of bounds (OOB)
+    /**
+     * Checks if both X and Y co-ordinates are Out of Bounds
+     * @param x
+     * @param y
+     * @return true or false
+     */
     public boolean isOOB(int x, int y){
         return isOOB(x) || isOOB(y);
     }// close checkOutOfBounds(int x, int y)

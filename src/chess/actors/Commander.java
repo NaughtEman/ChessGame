@@ -42,7 +42,12 @@ public class Commander {
      */
     public Commander(boolean isWhite) {
         this.isWhite = isWhite;
+        this.pName = isWhite ? "White" : "Black";
         setPieces();
+    }
+
+    public String getpName() {
+        return pName;
     }
     
     /**

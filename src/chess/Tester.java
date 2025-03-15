@@ -22,52 +22,6 @@ public class Tester {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        /*
-        CoOrdinates cd = new CoOrdinates();
-        
-        System.out.println("For the Pawn");
-        cd.setCordnts('A', 3);
-        System.out.println(cd.getCordnts());
-        
-        Pawn p = new Pawn(cd, true);
-        p.updateCordnts(cd);
-        p.showAllowedMoves();
-        //p.toString();
-        
-        System.out.println("For the Rook");
-        
-        cd.setCordnts(4, 4);
-        System.out.println(cd.getCordnts());
-        
-        Rook r = new Rook(cd, true);
-        r.showAllowedMoves();
-        //r.toString();
-        
-        System.out.println("For the Bishop");
-        cd.setCordnts(4, 4);
-        System.out.println(cd.getCordnts());
-        
-        Bishop b = new Bishop(cd, true);
-        b.showAllowedMoves();
-        //b.toString();
-        
-        System.out.println("For the Knight");
-        cd.setCordnts(4, 4);
-        System.out.println(cd.getCordnts());
-        
-        Knight k = new Knight(cd, true);
-        k.showAllowedMoves();
-        //b.toString();
-        
-        System.out.println("For the King");
-        cd.setCordnts(4, 4);
-        System.out.println(cd.getCordnts());
-        
-        King kg = new King(cd, true);
-        kg.showAllowedMoves();
-        //b.toString
-        */
-        
         ChessBoard board = ChessBoard.getInstance();
         
         GameManager gm = GameManager.getInstance();
@@ -77,7 +31,11 @@ public class Tester {
         Commander pB = gm.getPlayer(false);
         board.displayBoard();
         
-        pB.surrender();
+        board.movePiece("A2", "A4");
+        
+        board.displayBoard();
+        
+        //pB.surrender();
         
         
     }
