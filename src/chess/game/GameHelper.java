@@ -58,12 +58,8 @@ public class GameHelper {
             if (word.equalsIgnoreCase("surrender")) {
                 words.add("surrender");  // Add "surrender" directly to the list
             } else if (word.length() == 2) {
-                try {
-                    cd = new CoOrdinates(word);  // Create CoOrdinates object directly
-                    words.add(word);
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
+                movePieceInput(word);
+                
             } else if(word.contains("fallen")){
                 words.add("fallen");
             }else if(word.contains("vanquished")){
@@ -77,5 +73,14 @@ public class GameHelper {
     
     public List<String> getWords(){
         return words;
+    }
+
+    private void movePieceInput(String word) {
+        try {
+                cd = new CoOrdinates(word);  // Create CoOrdinates object directly
+                words.add(word);
+            } catch (IllegalArgumentException e) {
+                    //System.out.println(e.getMessage());
+            }
     }
 }

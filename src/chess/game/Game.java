@@ -31,16 +31,15 @@ public class Game {
     
     
     public static void main(String[] args) {
+        int switchPlayer = 0; // Tracks turns
         Game game = new Game();
-        game.gameLogic();
+        game.gameLogic(switchPlayer);
     }
     
-    public void gameLogic() {
-       int switchPlayer = 0;                      // Tracks turns
-
+    public void gameLogic(int switchPlayer) {
        while (gm.isGameRunning()) {
            player = (switchPlayer == 0) ? white : black;
-           switchPlayer = (switchPlayer == 0) ? 1 : 0; // Toggle player turns
+           
            
            board.displayBoard();
            
@@ -56,15 +55,23 @@ public class Game {
            
            if (gH.getWords().contains("fallen")) {
                player.printFallen();
+               gameLogic(switchPlayer);
                break;
            }else
            
            if (gH.getWords().contains("vanquished")) {
                player.printVanquished();
+               gameLogic(switchPlayer);
                break;
            }
            
-           board.movePiece(gH.getWords().get(0), gH.getWords().get(1));
+           if(!gH.getWords().isEmpty()){
+               board.movePiece(gH.getWords().get(0), gH.getWords().get(1));
+           }else{
+               gameLogic(switchPlayer);
+           }
+           
+           switchPlayer = (switchPlayer == 0) ? 1 : 0; // Toggle player turns
        }
 
        System.out.println("Game Over!");

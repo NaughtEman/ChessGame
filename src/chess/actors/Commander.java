@@ -160,9 +160,13 @@ public class Commander {
      * Prints all opponent pieces that this player has captured.
      */
     public void printVanquished(){
-        for(ChessPiece temp : vanquished){
-            
-            System.out.println(temp.toString());
+        
+        if(vanquished.isEmpty()){
+            System.out.println("You haven't killed anyone yet");
+        }else{
+            for(ChessPiece temp : vanquished){
+                System.out.println(temp.toString());
+            }
         }
         System.out.println();
     }
@@ -171,11 +175,15 @@ public class Commander {
      * Prints all pieces that this player has lost (fallen soldiers).
      */
     public void printFallen(){
-        for(ChessPiece temp : valhalla){
+        if(valhalla.isEmpty()){
+            System.out.println("No soldier dead yet");
+        }else{
+            for(ChessPiece temp : valhalla){
             
-            System.out.println(temp.toString());
-        }
-        System.out.println();
+                System.out.println(temp.toString());
+            }
+                System.out.println();
+        }   
     }
 
     /**
@@ -185,6 +193,7 @@ public class Commander {
      * @return true if a friendly piece occupies the coordinate, false otherwise.
      */
     public boolean comradeOccupied(CoOrdinates cd) {
+        
         for(ChessPiece temp : soldiers){
             if(temp.sameCD(cd)){
                 return true;
