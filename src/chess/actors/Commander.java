@@ -18,6 +18,8 @@ public class Commander {
      * or black (false). */
     private boolean isWhite;
     
+    private int movesNo;
+    
     /** The name of the player. */
     String pName;
     
@@ -220,6 +222,14 @@ public class Commander {
         } else {
             System.out.println("No soldiers remaining to surrender.");
         }
+    }
+    
+    public void incrementMoves(){
+        movesNo++;
+    }
+    
+    public int getMovesNo(){
+        return movesNo;
     }
 
 }

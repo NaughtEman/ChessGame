@@ -7,6 +7,8 @@ package chess.game;
 import chess.ChessBoard;
 import chess.actors.*;
 import java.util.*;
+import java.util.concurrent.*;
+
 
 
 /**
@@ -29,52 +31,73 @@ public class Game {
     
     Commander player;
     
+    private String mode = "";
+    Difficulty dif = new Difficulty();
+    
+    int switchPlayer = 0;
+    private volatile boolean playerMoved = false;
     
     public static void main(String[] args) {
-        int switchPlayer = 0; // Tracks turns
         Game game = new Game();
-        game.gameLogic(switchPlayer);
+        game.selectMode();
+        game.startGame();
     }
     
-    public void gameLogic(int switchPlayer) {
+    public void startGame() {
+        gameLogic();
+    }
+    
+    public void gameLogic() {
        while (gm.isGameRunning()) {
-           player = (switchPlayer == 0) ? white : black;
-           
-           
-           board.displayBoard();
-           
-           gH.getUserInput(player.getpName() + "'s turn. Enter your move:");
-           
+            player = (switchPlayer == 0) ? white : black;
+            playerMoved = false;  // Reset move status
+            
+            board.displayBoard();
+            
+            boolean response = gH.getUserInput(player.getpName() + "'s turn. Enter your move:", dif.getTime(mode));
+            
+            if (!response) {
+                System.out.println(player.getpName() + " missed their turn!");
+                switchTurn();
+                continue;
+            }
 
-           // Check for surrender
-           if (gH.getWords().contains("surrender")) {
-               player.surrender();
-               System.out.print(player.getpName() + " has surrendered! ");
-               break;
-           }else
-           
-           if (gH.getWords().contains("fallen")) {
-               player.printFallen();
-               gameLogic(switchPlayer);
-               break;
-           }else
-           
-           if (gH.getWords().contains("vanquished")) {
-               player.printVanquished();
-               gameLogic(switchPlayer);
-               break;
-           }
-           
-           if(!gH.getWords().isEmpty()){
-               board.movePiece(gH.getWords().get(0), gH.getWords().get(1));
-           }else{
-               gameLogic(switchPlayer);
-           }
-           
-           switchPlayer = (switchPlayer == 0) ? 1 : 0; // Toggle player turns
+            processMove();  // Handle move input
+            
+            switchTurn();
+            
        }
 
        System.out.println("Game Over!");
+       stopGame();
    }
+    
+    private void processMove() {
+        if (gH.getWords().contains("surrender")) {
+            player.surrender();
+            System.out.println(player.getpName() + " has surrendered! ");
+            stopGame();
+        } else if (gH.getWords().contains("fallen")) {
+            player.printFallen();
+        } else if (gH.getWords().contains("vanquished")) {
+            player.printVanquished();
+        } else if (!gH.getWords().isEmpty()) {
+            board.movePiece(gH.getWords().get(0), gH.getWords().get(1));
+            player.incrementMoves();
+            playerMoved = true;  // Mark as moved
+        }
+    }
+    
+    private void switchTurn() {
+        switchPlayer = (switchPlayer == 0) ? 1 : 0;
+    }
+
+    private void stopGame() {
+        //scheduler.shutdown();
+    }
+
+    private void selectMode() {
+        mode = gH.getMode();
+    }
     
 }

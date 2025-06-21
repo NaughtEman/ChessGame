@@ -21,23 +21,6 @@ public class Tester {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        ChessBoard board = ChessBoard.getInstance();
-        
-        GameManager gm = GameManager.getInstance();
-        
-        Commander pW = gm.getPlayer(true);
-                
-        Commander pB = gm.getPlayer(false);
-        board.displayBoard();
-        
-        board.movePiece("A2", "A4");
-        
-        board.displayBoard();
-        
-        //pB.surrender();
-        
-        
     }
     
 }

@@ -22,11 +22,13 @@ public class Rook extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        int[][] straightMoves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        CPMovements.straightMoves(this);
+        
+        /*int[][] straightMoves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         for (int[] move : straightMoves) {
             for (int i = 1; i <= 7; i++) { // Queen can move any number of squares
                 addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
             }
-        } 
+        } */
     }
 }

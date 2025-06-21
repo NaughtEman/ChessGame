@@ -5,11 +5,9 @@
         <group>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/ChessBoard.java</file>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/pieces/CoOrdinates.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/actors/Commander.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/pieces/ChessPiece.java</file>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/game/Game.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/Tester.java</file>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/game/GameHelper.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/Chess/src/chess/pieces/CPMovements.java</file>
         </group>
     </open-files>
 </project-private>

@@ -16,25 +16,9 @@ public class Queen extends ChessPiece{
     }
 
     @Override
-public void movementLogic() {
-    clearAllowedMoves();
-    
-    // Reuse Rook movement (horizontal & vertical)
-    int[][] straightMoves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    for (int[] move : straightMoves) {
-        for (int i = 1; i <= 7; i++) { // Queen can move any number of squares
-            addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
-        }
+    public void movementLogic() {
+        clearAllowedMoves();
+        CPMovements.diagonalMoves(this);
+        CPMovements.straightMoves(this);
     }
-
-    // Reuse Bishop movement (diagonals)
-    int[][] diagonalMoves = {{1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
-    for (int[] move : diagonalMoves) {
-        for (int i = 1; i <= 7; i++) {
-            addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
-        }
-    }
-}
-
-    
 }

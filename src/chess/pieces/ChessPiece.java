@@ -17,43 +17,59 @@ public abstract class ChessPiece {
     
     private CoOrdinates cordnts;
     
-    //private boolean canKill = false;
-    private boolean isFree = true;
-    boolean isWhite = true;
+    private boolean isFree = true; // if a piece is captured or not
+    boolean isWhite = true; // team color
     
-    private String name;
+    private String name; // piece name
+     
+    private String capturedBy; // stores the piece that captured this
     
-    private String capturedBy;
+    private List<CoOrdinates> allowedMoves = new ArrayList<>(); // stores all allowed moves
     
-    private List<CoOrdinates> allowedMoves = new ArrayList<>();
-    
+    /**
+     * ChessPiece constructor
+     * 
+     */
     public ChessPiece(String name, CoOrdinates initialPosition, boolean isWhite) {
         this.name = name;
         this.cordnts = initialPosition; 
         this.isWhite = isWhite;
     }
 
-    // get its current co-ordinates
+    /**
+     * Get this piece co-ordinates
+     * @return cordnts
+     */
     public CoOrdinates getCordnts() {
         return cordnts;
     }
     
-    // get chess piece name (rook,pawn e.t.c)
+    /**
+     * Get this piece name
+     * @return name
+     */
     public String getName() {
         return name;
     }
     
-    // set chess piece name (rook,pawn e.t.c)
+    /**
+     * Set this piece name
+     * @param name String name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    // returns a copy of the allowedMoves list
+    /** Returns a copy of the allowedMoves
+     * @return allowedMoves
+     */
     public List<CoOrdinates> getAllowedMoves() {
         return allowedMoves;
     }
     
-    // Prints allowed moves
+    /**
+     * Prints allowed moves
+     */
     public void showAllowedMoves() {
         
         if (!allowedMoves.isEmpty()) {
@@ -73,7 +89,7 @@ public abstract class ChessPiece {
     // Adds a coordinate to the allowed moves list if its not Out Of Bounds
     
     /**
-     * 
+     * Adds co-ordinates to the allowed moves list
      * @param cd. Co-ordinate to be added
      */
     public void addAllowedMove(CoOrdinates cd) {
@@ -98,13 +114,17 @@ public abstract class ChessPiece {
         this.allowedMoves.add(cd);
     }
 
-    
-    // Removes a coordinate from the allowed moves list
+    /** 
+     * Removes a coordinate from the allowed moves list
+     * @param cd 
+     */
     public void removeAllowedMove(CoOrdinates cd) {
         allowedMoves.remove(cd);
     }
     
-    // reset allowedMoves list
+    /** 
+     * Reset allowedMoves list
+     */
     public void clearAllowedMoves() {
         this.allowedMoves.clear();
     }
@@ -113,7 +133,10 @@ public abstract class ChessPiece {
         return isWhite;
     }
     
-    // Update the chess piece co-ordinates
+    /** 
+     * Update the chess piece co-ordinates
+     * @param cordnts 
+     */
     public void updateCordnts(CoOrdinates cordnts) {
         this.cordnts = cordnts;
         movementLogic();
@@ -121,6 +144,10 @@ public abstract class ChessPiece {
         // new Thread(this::movementLogic).start(); 
     }
     
+    /**
+     * Gets the piece that captured this 
+     * @param cp the capturer 
+     */
     public void deathNote(ChessPiece cp) {
         this.capturedBy = cp.getFullName();
         captured();   
@@ -138,10 +165,17 @@ public abstract class ChessPiece {
         return String.format( isWhite ? "W" + getName(): "B" + getName());
     }
     
+    /**
+     * Sends this piece to valhalla
+     * @param commander 
+     */
     public void goToValhalla(Commander commander){
         commander.quarterMaster(this);
     }
 
+    /**
+     * 
+     */
     public abstract void movementLogic();
     
     @Override

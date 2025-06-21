@@ -17,31 +17,6 @@ public class Knight extends ChessPiece{
 
     @Override
     public void movementLogic() {
-        
-        /*CoOrdinates kA = this.getCordnts().moveVertical(2, 1);
-        CoOrdinates A = kA.moveHorizontal(1, 1);
-        
-        CoOrdinates B = A.moveHorizontal(3, -1);
-        CoOrdinates H = A.moveDiagonalBS(1, -1);
-        CoOrdinates D = A.moveVertical(4, -1);
-        
-        CoOrdinates C = D.moveDiagonalFS(1, 1);
-        CoOrdinates E = D.moveHorizontal(3, -1);
-        
-        CoOrdinates G = B.moveDiagonalFS(1, -1);
-        
-        CoOrdinates F = G.moveVertical(2, -1);
-        
-        addAllowedMove(A);
-        addAllowedMove(B);
-        addAllowedMove(C);
-        addAllowedMove(D);
-        addAllowedMove(E);
-        addAllowedMove(F);
-        addAllowedMove(G);
-        addAllowedMove(H);
-        */
-         
          int[][] moves = {
             {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
             {1, 2}, {1, -2}, {-1, 2}, {-1, -2}

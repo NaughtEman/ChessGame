@@ -19,11 +19,6 @@ public class Bishop extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        int[][] diagonalMoves = {{1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
-        for (int[] move : diagonalMoves) {
-            for (int i = 1; i <= 7; i++) {
-                addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
-            }
-        }
+        CPMovements.diagonalMoves(this);
     }
 }
