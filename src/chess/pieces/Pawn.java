@@ -30,7 +30,7 @@ public class Pawn extends ChessPiece{
         allowedPawnCapture = new ArrayList<>();
     }
 
-     /** Calculates the movement logic for the Rook
+     /** Calculates the movement logic for the Pawn
       * 
       */
     @Override

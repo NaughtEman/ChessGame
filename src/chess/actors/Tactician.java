@@ -61,7 +61,7 @@ public class Tactician {
         }
 
         // Move the piece to the new location
-        board.removePiece(piece.getCordnts());
+        board.removePieceAt(piece.getCordnts());
         piece.updateCordnts(targetCoords);
         board.placePiece(piece, targetCoords);
 
@@ -90,7 +90,7 @@ public class Tactician {
         board.getBoard().remove(targetCoords);
 
         // Move attacker to the captured piece’s position
-        board.removePiece(attacker.getCordnts());  
+        board.removePieceAt(attacker.getCordnts());  
         attacker.updateCordnts(targetCoords);
         board.placePiece(attacker, targetCoords);
 

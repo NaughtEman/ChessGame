@@ -104,7 +104,7 @@ public abstract class ChessPiece {
         ChessPiece occupyingPiece = board.getBoard().get(cd);
         if (occupyingPiece != null) {
             // Allow capturing enemy pieces but stop movement beyond this point
-            if (!this.onSameTeam(occupyingPiece.getTeamColour())) {
+            if (!this.isAlly(occupyingPiece.getTeamColour())) {
                 this.allowedMoves.add(cd);
             }
             return; // Stop adding moves beyond this point
@@ -216,7 +216,7 @@ public abstract class ChessPiece {
     * @param isWhite the boolean representing the player's team color
     * @return true if the piece is on the same team, false otherwise
     */
-    public boolean onSameTeam(boolean team) {
+    public boolean isAlly(boolean team) {
         return this.getTeamColour() == team;
     }
 }

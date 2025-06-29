@@ -8,6 +8,7 @@ import chess.actors.Commander;
 import chess.actors.Tactician;
 import chess.pieces.CoOrdinates;
 import chess.pieces.ChessPiece;
+import chess.utilities.BoardObserver;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -19,6 +20,7 @@ public class ChessBoard {
     
     // Holds all chess pieces name (color and name of chess piece) and thier coordinates
     private Map<CoOrdinates, ChessPiece> board = new ConcurrentHashMap();
+    private List<BoardObserver> observers = new ArrayList<>();
     
     private static ChessBoard instance;
     
@@ -68,7 +70,7 @@ public class ChessBoard {
      * Removes a piece from a given coordinate.
      * @param cd The coordinate to clear.
      */
-    public synchronized void removePiece(CoOrdinates cd) {
+    public synchronized void removePieceAt(CoOrdinates cd) {
         board.remove(cd);
     }
     
@@ -119,6 +121,25 @@ public class ChessBoard {
        }
 
        Tactician.movePiece(piece, destination);
+       notifyObservers();
    }
+   
+   public void addObserver(BoardObserver observer) {
+        observers.add(observer);
+    }
+
+   /**
+    * Notify observers everytime a change has been made
+    */
+    private void notifyObservers() {
+        for (BoardObserver obs : observers) {
+            obs.onBoardChanged(this);
+        }
+    }
+    
+    public ChessPiece getPieceAt(int x, int y){
+        CoOrdinates cd = new CoOrdinates(x, y);
+        return board.get(cd);
+    }
      
 }
