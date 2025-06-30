@@ -4,6 +4,7 @@
  */
 package chess.pieces.enhanced;
 
+import chess.pieces.Direction;
 import chess.ChessBoard;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Rook;

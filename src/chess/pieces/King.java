@@ -22,11 +22,20 @@ public class King extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        int[][] moves = { {1, 0}, {0, 1}, {1, 1}, 
-            {-1, -1},{-1, 0}, {0, -1}, {-1, 1}, {1, -1}};
+        int x = getCordnts().getX();
+        int y = getCordnts().getY();
 
-        for (int[] move : moves) {
-            addAllowedMove(getCordnts().moveCustom(move[0], move[1]));
+        for (Direction dir : Direction.values()) {
+            
+            x += dir.dx();
+            y += dir.dy();
+            
+            CoOrdinates cd = new CoOrdinates(x, y);
+            
+            if(!cd.isOOB()){
+                addAllowedMove(cd);
+            }
+            
         }
     }
     

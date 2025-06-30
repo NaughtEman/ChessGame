@@ -18,7 +18,24 @@ public class Queen extends ChessPiece{
     @Override
     public void movementLogic() {
         clearAllowedMoves();
-        CPMovements.diagonalMoves(this);
-        CPMovements.straightMoves(this);
+        
+        int x = getCordnts().getX();
+        int y = getCordnts().getY();
+
+        for (Direction dir : Direction.values()) {
+            
+            for(int i = 1; i < 7; i++){
+                
+                x += dir.dx() * i;
+                y += dir.dy()* i;
+            
+                CoOrdinates cd = new CoOrdinates(x, y);
+            
+                if(!cd.isOOB()){
+                    addAllowedMove(cd);
+                }
+                
+            } 
+        }
     }
 }

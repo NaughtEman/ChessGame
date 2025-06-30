@@ -4,6 +4,8 @@
  */
 package chess.pieces.enhanced;
 
+import chess.pieces.Direction;
+
 /**
  *
  * @author dosum

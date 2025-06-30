@@ -4,11 +4,16 @@
  */
 package chess.pieces;
 
+import java.util.List;
+
 /**
  *
  * @author dosum
  */
 public class Rook extends ChessPiece{
+    
+    private List<Direction> direction = List.of(Direction.DOWN, Direction.UP, 
+            Direction.LEFT, Direction.RIGHT);
 
      public Rook(CoOrdinates initialPosition, boolean isWhite) {
         super("Rook", initialPosition, isWhite);
@@ -22,13 +27,21 @@ public class Rook extends ChessPiece{
     public void movementLogic() {
         clearAllowedMoves();
         
-        CPMovements.straightMoves(this);
+        int x = getCordnts().getX();
+        int y = getCordnts().getY();
         
-        /*int[][] straightMoves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (int[] move : straightMoves) {
-            for (int i = 1; i <= 7; i++) { // Queen can move any number of squares
-                addAllowedMove(getCordnts().moveCustom(move[0] * i, move[1] * i));
+        for (Direction dir : direction) {
+            for (int i = 1; i <= 7; i++) {
+                
+                x += dir.dx() * i;
+                y += dir.dy()* i;
+                
+                CoOrdinates cd = new CoOrdinates(x, y);
+            
+                if(!cd.isOOB()){
+                    addAllowedMove(cd);
+                }
             }
-        } */
+        } 
     }
 }
