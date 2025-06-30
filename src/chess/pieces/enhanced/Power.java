@@ -8,7 +8,7 @@ package chess.pieces.enhanced;
  *
  * @author dosum
  */
-public abstract class Power {
+public class Power {
     private String name;
     private String description;
     private boolean isUltimate;
@@ -18,11 +18,18 @@ public abstract class Power {
     //private boolean active;
     //private BiConsumer<ChessPiece,ChessBoard> effect;
 
-    public Power(String name, boolean isUltimate, int cooldown, int usesLeft) {
+    public Power(String name, int cooldown, int usesLeft) {
         this.name = name;
-        this.isUltimate = isUltimate;
+        this.isUltimate = false;
         this.cooldown = cooldown;
         this.usesLeft = usesLeft;
+    }
+    
+    public Power(String name, int cooldown) {
+        this.name = name;
+        this.isUltimate = true;
+        this.cooldown = cooldown;
+        this.usesLeft = 0;
     }
 
     public String getName() {
@@ -33,7 +40,7 @@ public abstract class Power {
         return description;
     }
 
-    public boolean isIsUltimate() {
+    public boolean isUltimate() {
         return isUltimate;
     }
 
@@ -52,9 +59,5 @@ public abstract class Power {
     public void updateUsesLeft(){
         usesLeft--;
     }
-    
-    public abstract void regPowerLogic();
-    
-    public abstract void ultPowerLogic();
     
 }

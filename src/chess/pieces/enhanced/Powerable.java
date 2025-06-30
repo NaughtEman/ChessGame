@@ -9,6 +9,6 @@ package chess.pieces.enhanced;
  * @author dosum
  */
 public interface Powerable {
-    void useRegularPower();
-    void useUltimatePower();
+    void useRegularPower(Direction d);
+    void useUltimatePower(Direction d);
 }

@@ -8,14 +8,20 @@ import chess.ChessBoard;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.utilities.BoardObserver;
+import java.util.List;
 
 /**A Spearman can capture a piece 2 cells ahead or horizontally
  *
  * @author dosum
  */
-public class Spearmen extends ChessPiece implements BoardObserver {
+public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     
     private ChessBoard board = ChessBoard.getInstance();
+    
+    private static final List<Direction> STAB_DIRECTIONS = List.of(Direction.UP, Direction.LEFT, Direction.RIGHT);
+    
+    private Power ultimate = new Power("Last Lance", 5);
+
 
     public Spearmen(String name, CoOrdinates initialPosition, boolean isWhite) {
         super(name, initialPosition, isWhite);
@@ -35,54 +41,75 @@ public class Spearmen extends ChessPiece implements BoardObserver {
         return piece != null && piece.getTeamColour() != this.getTeamColour();
     }
     
-    public boolean canStabU(){
+    public boolean canStab(Direction dir){
         int x = getCordnts().getX();
         int y = getCordnts().getY();
         
-        return isEnemy(board.getPieceAt(x, y +2));
-    }
-    
-    public boolean canStabL(){
-        int x = getCordnts().getX();
-        int y = getCordnts().getY();
+        int dx = dir.dx()*2;
+        int dy = dir.dy()*2;
         
-        return isEnemy(board.getPieceAt(x-2, y));
-    }
-    
-    public boolean canStabR(){
-        int x = getCordnts().getX();
-        int y = getCordnts().getY();
-        
-        return isEnemy(board.getPieceAt(x+2, y));
+        return isEnemy(board.getPieceAt(x+dx, y+dy));
     }
     
     /**
      * Stabs a piece in a co-ordinate
      * @param position, 1 is left, 2 is up, 3 is right 
      */
-    public void stab(int position){
-        if(position == 1){
-            stabHelper(-2, 0);
-        } else if (position == 2){
-            stabHelper(0, 2);
-        } else if(position == 3){
-            stabHelper(2, 0);
-        }
-    }
-    
-    // TODO implement valhalla and quartermaster update
-    private void stabHelper(int a, int b){
+    public void stab(Direction dir){
         int x = getCordnts().getX();
         int y = getCordnts().getY();
-        board.removePieceAt(new CoOrdinates(x + a, y+b));
         
+        int dx = dir.dx()*2;
+        int dy = dir.dy()*2;
+        
+        CoOrdinates target = new CoOrdinates(x + dx, y + dy);
+        if (!target.isOOB()) {
+            board.removePieceAt(target);
+        }
     }
 
     @Override
     public void onBoardChanged(ChessBoard board) {
-        if (canStabU() || canStabL() || canStabR()) {
-            System.out.println("⚠️ Spearman at " + getCordnts() + " is in range.");
+        for(Direction dir: STAB_DIRECTIONS){
+            if(canStab(dir)){
+                System.out.println("⚔️ Spearman at " + getCordnts() + " can stab " + dir + "!");
+            }else {
+                continue;
+            }
         }
+    }
+
+    // TODO implement valhalla and quartermaster update
+    @Override
+    public void useRegularPower(Direction dir) {
+        if (canStab(dir)) {
+            stab(dir);
+            System.out.println("Spearman stabbed " + dir + "!");
+        } else {
+            System.out.println("❌ No enemy to stab in direction: " + dir);
+        }
+    }
+
+    @Override
+    public void useUltimatePower(Direction dir) {
+        // Placeholder for throwing spear logic
+        System.out.println("⚡ Spearman throws spear to the " + dir + " (ultimate power)");
+        int x = getCordnts().getX();
+        int y = getCordnts().getY();
+        
+        int dx = dir.dx();
+        int dy = dir.dy();
+        
+        while(! new CoOrdinates(x+dx, y+dy).isOOB()){
+            x += dx;
+            y += dy;
+            
+            if(isEnemy(board.getPieceAt(x, y))){
+                board.removePieceAt(new CoOrdinates(x,y));
+            }
+        }
+        System.out.println("☠️ Spearman at " + getCordnts() + " sacrifices their life.");
+        board.removePieceAt(getCordnts());
     }
     
 }
