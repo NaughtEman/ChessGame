@@ -25,7 +25,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
 
 
     public Spearmen(String name, CoOrdinates initialPosition, boolean isWhite) {
-        super(name, initialPosition, isWhite);
+        super(name, initialPosition, isWhite, true);
     }
 
     @Override

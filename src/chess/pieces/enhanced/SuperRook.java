@@ -21,7 +21,10 @@ public class SuperRook extends Rook implements Powerable{
 
     public SuperRook(CoOrdinates initialPosition, boolean isWhite) {
         super(initialPosition, isWhite);
+        setSpecial(true);
     }
+    
+    
 
     @Override
     public void useRegularPower(Direction dir) {

@@ -17,7 +17,7 @@ public class Pawn extends ChessPiece{
     boolean isFirstMove = true;
 
      public Pawn(CoOrdinates initialPosition, boolean isWhite) {
-        super("Pawn", initialPosition, isWhite);
+        super("Pawn", initialPosition, isWhite, false);
         this.allowedPawnCapture = new ArrayList<>();
         movementLogic();
     }

@@ -20,7 +20,7 @@ public class Kamikaze extends ChessPiece implements BoardObserver{
     private List<CoOrdinates> allowedKamikazeCapture;
     private ChessBoard board = ChessBoard.getInstance();
      public Kamikaze(CoOrdinates initialPosition, boolean isWhite) {
-        super("Kamikaze", initialPosition, isWhite);
+        super("Kamikaze", initialPosition, isWhite, true);
         this.allowedKamikazeCapture = new ArrayList<>();
         movementLogic();
     }

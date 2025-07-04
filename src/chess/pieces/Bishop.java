@@ -16,7 +16,7 @@ public class Bishop extends ChessPiece{
             Direction.BACK_SLASH_UP, Direction.FORWARD_SLASH_DOWN, Direction.FORWARD_SLASH_UP);
 
     public Bishop(CoOrdinates initialPosition, boolean isWhite) {
-        super("Bishop", initialPosition, isWhite);
+        super("Bishop", initialPosition, isWhite, false);
         movementLogic();
     }
 

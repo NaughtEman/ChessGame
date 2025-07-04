@@ -16,7 +16,7 @@ public class Rook extends ChessPiece{
             Direction.LEFT, Direction.RIGHT);
 
      public Rook(CoOrdinates initialPosition, boolean isWhite) {
-        super("Rook", initialPosition, isWhite);
+        super("Rook", initialPosition, isWhite, false);
         movementLogic();
     }
      

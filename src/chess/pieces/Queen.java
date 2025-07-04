@@ -11,7 +11,7 @@ package chess.pieces;
 public class Queen extends ChessPiece{
 
     public Queen(CoOrdinates initialPosition, boolean isWhite) {
-        super("Queen", initialPosition, isWhite);
+        super("Queen", initialPosition, isWhite, false);
         movementLogic();
     }
 

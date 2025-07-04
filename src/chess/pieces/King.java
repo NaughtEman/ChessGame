@@ -14,7 +14,7 @@ import chess.actors.GameManager;
 public class King extends ChessPiece{
 
     public King( CoOrdinates initialPosition, boolean isWhite) {
-        super("King", initialPosition, isWhite);
+        super("King", initialPosition, isWhite, false);
         movementLogic();
     }
 

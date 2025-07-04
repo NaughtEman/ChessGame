@@ -20,6 +20,8 @@ public abstract class ChessPiece {
     private boolean isFree = true; // if a piece is captured or not
     boolean isWhite = true; // team color
     
+    private boolean isSpecial;
+    
     private String name; // piece name
      
     private String capturedBy; // stores the piece that captured this
@@ -30,10 +32,19 @@ public abstract class ChessPiece {
      * ChessPiece constructor
      * 
      */
-    public ChessPiece(String name, CoOrdinates initialPosition, boolean isWhite) {
+    public ChessPiece(String name, CoOrdinates initialPosition, boolean isWhite, boolean isSpecial) {
         this.name = name;
         this.cordnts = initialPosition; 
         this.isWhite = isWhite;
+        this.isSpecial = isSpecial;
+    }
+    
+    public boolean special(){
+        return isSpecial;
+    }
+    
+    public void setSpecial(boolean bool){
+        isSpecial = bool;
     }
 
     /**
