@@ -9,13 +9,16 @@ package chess.pieces;
  * @author dosum
  */
 
-import chess.ChessBoard;
+import chess.pieces.abilities.StatusEffect;
+import chess.battlefield.ChessBoard;
 import chess.actors.Commander;
 import java.util.*;
 
 public abstract class ChessPiece {
     
     private CoOrdinates cordnts;
+    
+    protected ChessBoard board = ChessBoard.getInstance();
     
     private boolean isFree = true; // if a piece is captured or not
     boolean isWhite = true; // team color
@@ -26,7 +29,11 @@ public abstract class ChessPiece {
      
     private String capturedBy; // stores the piece that captured this
     
+    private String id;
+    
     private List<CoOrdinates> allowedMoves = new ArrayList<>(); // stores all allowed moves
+    
+    private List<StatusEffect> statusEffect = new ArrayList<>();
     
     /**
      * ChessPiece constructor
@@ -37,6 +44,11 @@ public abstract class ChessPiece {
         this.cordnts = initialPosition; 
         this.isWhite = isWhite;
         this.isSpecial = isSpecial;
+        id = String.format("%s",name, initialPosition.toString());
+    }
+    
+    public String getID(){
+        return id;
     }
     
     public boolean special(){
@@ -229,5 +241,9 @@ public abstract class ChessPiece {
     */
     public boolean isAlly(boolean team) {
         return this.getTeamColour() == team;
+    }
+    
+    public void addStatusEffect(StatusEffect se){
+        statusEffect.add(se);
     }
 }

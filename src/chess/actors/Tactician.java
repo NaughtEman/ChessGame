@@ -8,6 +8,7 @@ package chess.actors;
  *
  * @author dosum
  */
+import chess.battlefield.ChessBoard;
 import chess.*;
 import chess.pieces.*;
 

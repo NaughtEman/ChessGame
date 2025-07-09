@@ -4,8 +4,10 @@
  */
 package chess.pieces.enhanced;
 
+import chess.pieces.abilities.Powerable;
+import chess.pieces.abilities.Power;
 import chess.pieces.Direction;
-import chess.ChessBoard;
+import chess.battlefield.ChessBoard;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Rook;
 
@@ -15,9 +17,8 @@ import chess.pieces.Rook;
  */
 public class SuperRook extends Rook implements Powerable{
     
-    private Power ultimate = new Power("Path to Valhalla",0);
-    private Power regular = new Power("Judgement path", 2, 2);
-    private ChessBoard board = ChessBoard.getInstance();
+    private Power ultimate = new Power("Path to Valhalla",8, true);
+    private Power regular = new Power("Odin's March", 3, false);
 
     public SuperRook(CoOrdinates initialPosition, boolean isWhite) {
         super(initialPosition, isWhite);

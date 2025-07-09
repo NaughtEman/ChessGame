@@ -4,9 +4,12 @@
  */
 package chess.pieces.enhanced;
 
-import chess.ChessBoard;
+import chess.pieces.abilities.Powerable;
+import chess.pieces.abilities.Power;
+import chess.battlefield.ChessBoard;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
+import chess.pieces.Direction;
 import chess.utilities.BoardObserver;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +18,17 @@ import java.util.List;
  *
  * @author dosum
  */
-public class Kamikaze extends ChessPiece implements BoardObserver{
+public class Bomber extends ChessPiece implements BoardObserver,Powerable{
     
-    private List<CoOrdinates> allowedKamikazeCapture;
-    private ChessBoard board = ChessBoard.getInstance();
-     public Kamikaze(CoOrdinates initialPosition, boolean isWhite) {
-        super("Kamikaze", initialPosition, isWhite, true);
-        this.allowedKamikazeCapture = new ArrayList<>();
+    private List<CoOrdinates> allowedBomberCapture;
+    
+    private List<Direction> direction = new ArrayList<>();
+    
+    private Power ultimate = new Power("Kamikaze",6, true);
+    
+     public Bomber(CoOrdinates initialPosition, boolean isWhite) {
+        super("Bomber", initialPosition, isWhite, true);
+        this.allowedBomberCapture = new ArrayList<>();
         movementLogic();
     }
 
@@ -85,6 +92,29 @@ public class Kamikaze extends ChessPiece implements BoardObserver{
         if (canDetonateH() || canDetonateV()) {
             System.out.println("⚠️ Kamikaze at " + getCordnts() + " is ready to detonate.");
         }
+    }
+
+    @Override
+    public void useRegularPower(Direction d) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void useUltimatePower(Direction d) {
+        int x = getCordnts().getX(), y = getCordnts().getY();
+        for(Direction dir : Direction.values()){
+            x += dir.dx();
+            y += dir.dy();
+            
+            int x2 =  x + dir.dx() *2;
+            int y2 = y + dir.dy()*2;
+            
+            board.removePieceAt(new CoOrdinates(x, y));
+            board.removePieceAt(new CoOrdinates(x2, y2));
+            // TODO update that the piece was killed and is in vallhalla
+        }
+        board.removePieceAt(getCordnts());
+        // TODO send piece to valhalla
     }
 
     

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package chess;
+package chess.battlefield;
 
 import chess.actors.Commander;
 import chess.actors.Tactician;
@@ -141,5 +141,32 @@ public class ChessBoard {
         CoOrdinates cd = new CoOrdinates(x, y);
         return board.get(cd);
     }
+    
+    public ChessPiece getPieceAt(CoOrdinates cd){
+        return board.get(cd);
+    }
+    
+    public void swap(CoOrdinates a, CoOrdinates b) {
+        ChessPiece pieceA = board.get(a);
+        ChessPiece pieceB = board.get(b);
+
+        if (pieceA == null && pieceB == null) return;
+
+        // Remove current mappings
+        board.remove(a);
+        board.remove(b);
+
+        // Swap positions in the board map
+        if (pieceA != null) {
+            pieceA.updateCordnts(b);
+            board.put(b, pieceA);
+        }
+
+        if (pieceB != null) {
+            pieceB.updateCordnts(a);
+            board.put(a, pieceB);
+        }
+    }
+
      
 }

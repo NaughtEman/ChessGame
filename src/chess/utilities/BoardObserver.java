@@ -4,7 +4,7 @@
  */
 package chess.utilities;
 
-import chess.ChessBoard;
+import chess.battlefield.ChessBoard;
 
 /**
  *

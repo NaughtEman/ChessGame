@@ -4,8 +4,10 @@
  */
 package chess.pieces.enhanced;
 
+import chess.pieces.abilities.Powerable;
+import chess.pieces.abilities.Power;
 import chess.pieces.Direction;
-import chess.ChessBoard;
+import chess.battlefield.ChessBoard;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.utilities.BoardObserver;
@@ -17,11 +19,9 @@ import java.util.List;
  */
 public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     
-    private ChessBoard board = ChessBoard.getInstance();
-    
     private static final List<Direction> STAB_DIRECTIONS = List.of(Direction.UP, Direction.LEFT, Direction.RIGHT);
     
-    private Power ultimate = new Power("Last Lance", 5);
+    private Power ultimate = new Power("Last Lance", 6, true);
 
 
     public Spearmen(String name, CoOrdinates initialPosition, boolean isWhite) {
