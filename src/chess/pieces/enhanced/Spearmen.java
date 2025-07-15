@@ -10,6 +10,9 @@ import chess.pieces.Direction;
 import chess.battlefield.ChessBoard;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
+import chess.pieces.abilities.PowerContext;
+import chess.pieces.dead.DeathType;
+import chess.pieces.dead.Psychopomp;
 import chess.utilities.BoardObserver;
 import java.util.List;
 
@@ -82,7 +85,8 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
 
     // TODO implement valhalla and quartermaster update
     @Override
-    public void useRegularPower(Direction dir) {
+    public void useRegularPower(PowerContext pc) {
+        Direction dir = pc.getDirection();
         if (canStab(dir)) {
             stab(dir);
             System.out.println("Spearman stabbed " + dir + "!");
@@ -92,7 +96,10 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     }
 
     @Override
-    public void useUltimatePower(Direction dir) {
+    public void useUltimatePower(PowerContext pc) {
+        
+        Direction dir = pc.getDirection();
+        
         // Placeholder for throwing spear logic
         System.out.println("⚡ Spearman throws spear to the " + dir + " (ultimate power)");
         int x = getCordnts().getX();
@@ -110,7 +117,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
             }
         }
         System.out.println("☠️ Spearman at " + getCordnts() + " sacrifices their life.");
-        board.removePieceAt(getCordnts());
+        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
     }
     
 }

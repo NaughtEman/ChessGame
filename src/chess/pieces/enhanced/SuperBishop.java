@@ -10,7 +10,9 @@ import chess.pieces.Bishop;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Direction;
+import chess.pieces.abilities.PowerContext;
 import chess.pieces.abilities.StatusEffect;
+import chess.pieces.dead.*;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class SuperBishop extends Bishop implements Powerable{
     }
 
     @Override
-    public void useRegularPower(Direction d) {
+    public void useRegularPower(PowerContext pc) {
         if(reg.getCooldown() == 0){
             for(CoOrdinates coords:getAllowedMoves()){
                 ChessPiece receiver = board.getPieceAt(coords.getX(), coords.getY());
@@ -51,12 +53,12 @@ public class SuperBishop extends Bishop implements Powerable{
     }
 
     @Override
-    public void useUltimatePower(Direction d) {
+    public void useUltimatePower(PowerContext pc) {
         lpR1.addStatusEffect(ultBlessing);
         lpR2.addStatusEffect(ultBlessing);
         lpR3.addStatusEffect(ultBlessing);
         
-        board.removePieceAt(getCordnts());
+        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
     }
     
     public void prepareUlt(CoOrdinates cd1, CoOrdinates cd2, CoOrdinates cd3){

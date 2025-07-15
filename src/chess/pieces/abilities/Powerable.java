@@ -11,6 +11,6 @@ import chess.pieces.Direction;
  * @author dosum
  */
 public interface Powerable {
-    void useRegularPower(Direction d);
-    void useUltimatePower(Direction d);
+    void useRegularPower(PowerContext pc);
+    void useUltimatePower(PowerContext pc);
 }

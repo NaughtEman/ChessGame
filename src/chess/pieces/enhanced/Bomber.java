@@ -10,6 +10,8 @@ import chess.battlefield.ChessBoard;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Direction;
+import chess.pieces.abilities.PowerContext;
+import chess.pieces.dead.*;
 import chess.utilities.BoardObserver;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,12 +97,12 @@ public class Bomber extends ChessPiece implements BoardObserver,Powerable{
     }
 
     @Override
-    public void useRegularPower(Direction d) {
+    public void useRegularPower(PowerContext pc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void useUltimatePower(Direction d) {
+    public void useUltimatePower(PowerContext pc) {
         int x = getCordnts().getX(), y = getCordnts().getY();
         for(Direction dir : Direction.values()){
             x += dir.dx();
@@ -113,8 +115,7 @@ public class Bomber extends ChessPiece implements BoardObserver,Powerable{
             board.removePieceAt(new CoOrdinates(x2, y2));
             // TODO update that the piece was killed and is in vallhalla
         }
-        board.removePieceAt(getCordnts());
-        // TODO send piece to valhalla
+        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
     }
 
     

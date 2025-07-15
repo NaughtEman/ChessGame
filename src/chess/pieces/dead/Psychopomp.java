@@ -4,6 +4,7 @@
  */
 package chess.pieces.dead;
 
+import chess.battlefield.ChessBoard;
 import chess.pieces.ChessPiece;
 
 /**
@@ -14,25 +15,31 @@ public class Psychopomp {
     
     private ChessPiece chesspiece;
     
-    private boolean killed;
-    
     private String id;
-
-    public Psychopomp(ChessPiece chesspiece, boolean killed) {
+    
+    private DeathType deathType;
+    
+    private ChessBoard board = ChessBoard.getInstance();
+    
+    private int turnOfDeath;
+    
+    public Psychopomp(ChessPiece chesspiece, DeathType deathType) {
         this.chesspiece = chesspiece;
-        this.killed = killed;
+        this.deathType = deathType;
         this.id = chesspiece.getID();
         
         Mortavia mortavia = Mortavia.getInstance();
         mortavia.addSoul(this);
+        board.removePieceAt(chesspiece.getCordnts());
+        
     }
 
     public ChessPiece getChessPiece() {
         return chesspiece;
     }
 
-    public boolean isKilled() {
-        return killed;
+    public DeathType getDeathType() {
+        return deathType;
     }
 
     public String getId() {

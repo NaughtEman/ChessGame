@@ -51,6 +51,7 @@ public class ChessBoard {
      */
     public synchronized boolean placePiece(ChessPiece piece, CoOrdinates cd) {
         if (isFree(cd)) {
+            piece.updateCordnts(cd);
             board.put(cd, piece);
             return true;
         }

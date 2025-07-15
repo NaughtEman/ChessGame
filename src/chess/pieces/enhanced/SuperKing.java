@@ -11,6 +11,7 @@ import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Direction;
 import chess.pieces.King;
+import chess.pieces.abilities.PowerContext;
 
 /**
  *
@@ -41,16 +42,12 @@ public class SuperKing extends King implements Powerable{
     }
 
     @Override
-    public void useRegularPower(Direction d) {
-        if (escapeTo != null) {
-            board.swap(escapeTo, getCordnts());
-        } else {
-            System.out.println("⚠️ No valid escape target selected!");
-        }
+    public void useRegularPower(PowerContext pc) {
+        board.swap(pc.getTargetPiece().getCordnts(), getCordnts());
     }
 
     @Override
-    public void useUltimatePower(Direction d) {
+    public void useUltimatePower(PowerContext pc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

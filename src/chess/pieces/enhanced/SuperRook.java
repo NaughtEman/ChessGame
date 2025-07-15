@@ -8,8 +8,11 @@ import chess.pieces.abilities.Powerable;
 import chess.pieces.abilities.Power;
 import chess.pieces.Direction;
 import chess.battlefield.ChessBoard;
+import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Rook;
+import chess.pieces.abilities.PowerContext;
+import chess.pieces.dead.*;
 
 /**
  *
@@ -28,12 +31,29 @@ public class SuperRook extends Rook implements Powerable{
     
 
     @Override
-    public void useRegularPower(Direction dir) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void useRegularPower(PowerContext pc) {
+        
+        Direction dir = pc.getDirection();
+        
+        if(regular.getCooldown() == 0){
+            int x = getCordnts().getX();
+            int y = getCordnts().getY();
+            
+            int tempx = x + dir.dx()*2;
+            int tempy = x + dir.dy()*2;
+            
+            for(int i = 1; i <= 2; i++){
+                
+            }
+        }else{
+            System.err.println("Power is not ready yet.");
+        }
     }
 
     @Override
-    public void useUltimatePower(Direction dir) {
+    public void useUltimatePower(PowerContext pc) {
+        
+        Direction dir = pc.getDirection();
         
         int x = getCordnts().getX();
         int y = getCordnts().getX();
@@ -46,10 +66,18 @@ public class SuperRook extends Rook implements Powerable{
             x += dx;
             y += dy;
             
-            board.removePieceAt(new CoOrdinates(x,y));
+            ChessPiece piece = board.getPieceAt(new CoOrdinates(x + dx,y+dy));
+            
+            if(isEnemy(piece)){
+                Psychopomp psychopomp = new Psychopomp(piece, DeathType.KILLED);
+            }
         }
         
-        board.removePieceAt(getCordnts());
+        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
+    }
+    
+    private boolean isEnemy(ChessPiece piece) {
+        return piece != null && piece.getTeamColour() != this.getTeamColour();
     }
     
 }

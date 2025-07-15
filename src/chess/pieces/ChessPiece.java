@@ -13,6 +13,7 @@ import chess.pieces.abilities.StatusEffect;
 import chess.battlefield.ChessBoard;
 import chess.actors.Commander;
 import java.util.*;
+import chess.pieces.dead.*;
 
 public abstract class ChessPiece {
     
@@ -168,7 +169,7 @@ public abstract class ChessPiece {
     }
     
     /**
-     * Gets the piece that captured this 
+     * Gets the piece that killed this 
      * @param cp the capturer 
      */
     public void deathNote(ChessPiece cp) {

@@ -12,6 +12,8 @@ import chess.battlefield.ChessBoard;
 import chess.*;
 import chess.pieces.*;
 
+import chess.pieces.dead.*;
+
 public class Tactician {
 
     private static final ChessBoard board = ChessBoard.getInstance();
@@ -70,7 +72,9 @@ public class Tactician {
     }
 
     private static boolean executeCapture(ChessPiece attacker, CoOrdinates targetCoords) {
+        // piece getting killed
         ChessPiece targetPiece = board.getBoard().get(targetCoords);
+        
         GameManager gm = GameManager.getInstance();
 
         if (targetPiece == null) { 
@@ -79,20 +83,21 @@ public class Tactician {
         }
 
         // Retrieve the commanders
-        Commander attackingCommander = gm.getPlayer(attacker.getTeamColour());
-        Commander defendingCommander = gm.getPlayer(targetPiece.getTeamColour());
+        Commander attackingCommander = gm.getPlayer(attacker.getTeamColour()); // killer
+        Commander defendingCommander = gm.getPlayer(targetPiece.getTeamColour()); // getting killed
 
         // Mark the captured piece
         targetPiece.deathNote(attacker);
         attackingCommander.getVanquished().add(targetPiece);
-        targetPiece.goToValhalla(defendingCommander);
+        //targetPiece.goToValhalla(defendingCommander);
+        
+        Psychopomp psychopomp = new Psychopomp(targetPiece, DeathType.KILLED);
 
         // Remove captured piece from the board
-        board.getBoard().remove(targetCoords);
+        //board.getBoard().remove(targetCoords);
 
         // Move attacker to the captured piece’s position
         board.removePieceAt(attacker.getCordnts());  
-        attacker.updateCordnts(targetCoords);
         board.placePiece(attacker, targetCoords);
 
         return true;
