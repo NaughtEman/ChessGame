@@ -56,4 +56,10 @@ public class Power {
         }
         return false;
     }
+    
+    public String PowerDetails() {
+        return String.format("Power Details: " + "\nName:" + name +  "\nUltimate: " + isUltimate + "\nCooldown=" + cooldown);
+    }
+    
+    
 }

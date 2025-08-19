@@ -11,7 +11,7 @@ package chess.pieces;
 
 import chess.pieces.abilities.StatusEffect;
 import chess.battlefield.ChessBoard;
-import chess.actors.Commander;
+import chess.players.Commander;
 import chess.pieces.abilities.EffectType;
 import java.util.*;
 import chess.pieces.dead.*;

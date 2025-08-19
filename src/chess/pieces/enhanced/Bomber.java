@@ -71,9 +71,15 @@ public class Bomber extends ChessPiece implements Powerable{
             }
             Psychopomp psychopomp = new Psychopomp(this);
         }
-        
+    }    
+
+    @Override
+    public Power getUPower() {
+        return ult;
     }
 
-    
-    
+    @Override
+    public Power getRPower() {
+        return ult;
+    }
 }

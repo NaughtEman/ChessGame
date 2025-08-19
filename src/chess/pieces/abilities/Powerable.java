@@ -13,4 +13,6 @@ import chess.pieces.Direction;
 public interface Powerable {
     void useRegularPower(PowerContext pc);
     void useUltimatePower(PowerContext pc);
+    Power getUPower();
+    Power getRPower();
 }

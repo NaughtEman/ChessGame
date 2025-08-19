@@ -20,8 +20,8 @@ import chess.pieces.dead.*;
  */
 public class SuperRook extends Rook implements Powerable{
     
-    private Power ultimate = new Power("Path to Valhalla",8, true);
-    private Power regular = new Power("Odin's March", 3, false);
+    private Power ult = new Power("Path to Valhalla",8, true);
+    private Power reg = new Power("Odin's March", 3, false);
 
     public SuperRook(CoOrdinates initialPosition, boolean isWhite) {
         super(initialPosition, isWhite);
@@ -38,7 +38,7 @@ public class SuperRook extends Rook implements Powerable{
         
         Direction dir = pc.getDirection();
         
-        if(regular.getCooldown() == 0){
+        if(reg.getCooldown() == 0){
             int x = getCordnts().getX();
             int y = getCordnts().getY();
             
@@ -90,6 +90,16 @@ public class SuperRook extends Rook implements Powerable{
      */
     private boolean isEnemy(ChessPiece piece) {
         return piece != null && piece.getTeamColour() != this.getTeamColour();
+    }
+
+    @Override
+    public Power getUPower() {
+        return ult;
+    }
+
+    @Override
+    public Power getRPower() {
+        return reg;
     }
     
 }

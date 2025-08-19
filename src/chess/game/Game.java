@@ -4,8 +4,8 @@
  */
 package chess.game;
 
+import chess.players.Commander;
 import chess.battlefield.ChessBoard;
-import chess.actors.*;
 import java.util.*;
 import java.util.concurrent.*;
 

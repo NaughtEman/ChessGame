@@ -4,8 +4,8 @@
  */
 package chess.pieces;
 
-import chess.actors.GameEndListener;
-import chess.actors.GameManager;
+import chess.game.GameEndListener;
+import chess.game.GameManager;
 
 /**
  *

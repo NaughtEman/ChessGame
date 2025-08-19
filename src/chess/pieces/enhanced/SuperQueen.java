@@ -45,4 +45,14 @@ public class SuperQueen extends Queen implements Powerable{
     public void useUltimatePower(PowerContext pc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Power getUPower() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Power getRPower() {
+        return reg;
+    }
 }

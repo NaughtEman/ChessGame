@@ -122,5 +122,15 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
         }
         
     }
+
+    @Override
+    public Power getUPower() {
+        return ult;
+    }
+
+    @Override
+    public Power getRPower() {
+        return reg;
+    }
     
 }

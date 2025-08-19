@@ -4,13 +4,14 @@
  */
 package chess;
 
-import chess.actors.Commander;
-import chess.actors.GameManager;
+import chess.players.Commander;
+import chess.game.GameManager;
 import chess.battlefield.ChessBoard;
 import chess.game.GameHelper;
 import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 import chess.pieces.abilities.PowerContext;
+import chess.pieces.abilities.PowerManager;
 import chess.pieces.enhanced.SuperKing;
 
 
@@ -32,6 +33,10 @@ public class Tester {
         Commander black = gm.getPlayer(false);
         
         ChessBoard board = ChessBoard.getInstance();
+        
+        PowerManager.listPowerDetails(white);
+        
+        /*
 
         board.displayBoard();
         
@@ -46,7 +51,7 @@ public class Tester {
         king.useRegularPower(pc);
         
         board.displayBoard();
-        
+        */
     }
     
 }

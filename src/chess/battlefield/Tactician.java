@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package chess.actors;
+package chess.battlefield;
 
 /**
  *
  * @author dosum
  */
+import chess.game.GameManager;
 import chess.battlefield.ChessBoard;
 import chess.*;
+import chess.players.Commander;
 import chess.pieces.*;
 
 import chess.pieces.dead.*;
