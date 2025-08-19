@@ -9,19 +9,21 @@ package chess.pieces.abilities;
  * @author dosum
  */
 public class StatusEffect {
-    private String name;
+    private EffectType type;
+    //private String name;
     private int duration;
-    private String type;
+    private String id;
 
-    public StatusEffect(String name, int duration, String type) {
-        this.name = name;
+    public StatusEffect(int duration, EffectType type) {
+        //this.name = name;
         this.duration = duration;
         this.type = type;
     }
-
+    
+    /*
     public String getName() {
         return name;
-    }
+    }*/
 
     public int getDuration() {
         return duration;
@@ -31,13 +33,13 @@ public class StatusEffect {
         duration--;
     }
 
-    public String getType() {
+    public EffectType getType() {
         return type;
     }
     
     // Allows for easy duplicate of status
     public StatusEffect copy() {
-        return new StatusEffect(this.name, this.duration, this.type);
+        return new StatusEffect(this.duration, this.type);
     }
 
 }

@@ -20,13 +20,14 @@ import java.util.List;
  *
  * @author dosum
  */
-public class Bomber extends ChessPiece implements BoardObserver,Powerable{
+public class Bomber extends ChessPiece implements Powerable{
     
     private List<CoOrdinates> allowedBomberCapture;
     
     private List<Direction> direction = new ArrayList<>();
     
-    private Power ultimate = new Power("Kamikaze",6, true);
+    private Power ult = new Power("Kamikaze",6, true);
+    private Power reg = new Power("Bomb Toss",0, false);
     
      public Bomber(CoOrdinates initialPosition, boolean isWhite) {
         super("Bomber", initialPosition, isWhite, true);
@@ -44,56 +45,8 @@ public class Bomber extends ChessPiece implements BoardObserver,Powerable{
         addAllowedMove(getCordnts().moveCustom(0, d));
     }
     
-    /**
-     * Checks if the conditions for detonation are true
-     * @param board
-     * @return true if bounded horizontally by opposing pieces 
-     */
-    public boolean canDetonateH() {
-        int x = getCordnts().getX(), y = getCordnts().getY();
-        return isEnemy(board.getPieceAt(x - 1, y)) && isEnemy(board.getPieceAt(x + 1, y));
-    }
-    
-    /**
-     * Checks if the conditions for detonation are true
-     * @param board
-     * @return true if bounded vertically by opposing pieces 
-     */
-    public boolean canDetonateV() {
-        int x = getCordnts().getX(), y = getCordnts().getY();
-        return isEnemy(board.getPieceAt(x, y - 1)) && isEnemy(board.getPieceAt(x, y + 1));
-    }
-    
     private boolean isEnemy(ChessPiece piece) {
         return piece != null && piece.getTeamColour() != this.getTeamColour();
-    }
-    
-    // TODO implement valhalla and quarter master method when power used.
-    
-    public void detonateV(){
-        if (!canDetonateV()) return;
-        int x = getCordnts().getX(), y = getCordnts().getY();
-        board.removePieceAt(new CoOrdinates(x, y - 1));
-        board.removePieceAt(new CoOrdinates(x, y + 1));
-        board.removePieceAt(getCordnts());
-    }
-    
-    /**
-     * Detonate bomb horizontally
-     */
-    public void detonateH(){
-        if (!canDetonateH()) return;
-        int x = getCordnts().getX(), y = getCordnts().getY();
-        board.removePieceAt(new CoOrdinates(x - 1, y));
-        board.removePieceAt(new CoOrdinates(x + 1, y));
-        board.removePieceAt(getCordnts());
-    }
-
-    @Override
-    public void onBoardChanged(ChessBoard board) {
-        if (canDetonateH() || canDetonateV()) {
-            System.out.println("⚠️ Kamikaze at " + getCordnts() + " is ready to detonate.");
-        }
     }
 
     @Override
@@ -103,19 +56,22 @@ public class Bomber extends ChessPiece implements BoardObserver,Powerable{
 
     @Override
     public void useUltimatePower(PowerContext pc) {
-        int x = getCordnts().getX(), y = getCordnts().getY();
-        for(Direction dir : Direction.values()){
-            x += dir.dx();
-            y += dir.dy();
-            
-            int x2 =  x + dir.dx() *2;
-            int y2 = y + dir.dy()*2;
-            
-            board.removePieceAt(new CoOrdinates(x, y));
-            board.removePieceAt(new CoOrdinates(x2, y2));
-            // TODO update that the piece was killed and is in vallhalla
+        
+        if(ult.charged()){
+            int x = getCordnts().getX(), y = getCordnts().getY();
+            for(Direction dir : Direction.values()){
+                x += dir.dx();
+                y += dir.dy();
+
+                int x2 =  x + dir.dx() *2;
+                int y2 = y + dir.dy()*2;
+
+                Psychopomp psychopomp = new Psychopomp(board.getPieceAt(new CoOrdinates(x, y)),this);
+                Psychopomp psychopomp2 = new Psychopomp(board.getPieceAt(new CoOrdinates(x2, y2)),this);
+            }
+            Psychopomp psychopomp = new Psychopomp(this);
         }
-        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
+        
     }
 
     

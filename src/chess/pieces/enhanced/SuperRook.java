@@ -29,7 +29,10 @@ public class SuperRook extends Rook implements Powerable{
     }
     
     
-
+    /**
+     * Can kill up to 2 enemies in its path
+     * @param pc 
+     */
     @Override
     public void useRegularPower(PowerContext pc) {
         
@@ -49,7 +52,11 @@ public class SuperRook extends Rook implements Powerable{
             System.err.println("Power is not ready yet.");
         }
     }
-
+    /**
+     * Path to Valhalla, Moves in a straight line till OOB killing all enemies 
+     * in its path.
+     * @param pc 
+     */
     @Override
     public void useUltimatePower(PowerContext pc) {
         
@@ -69,13 +76,18 @@ public class SuperRook extends Rook implements Powerable{
             ChessPiece piece = board.getPieceAt(new CoOrdinates(x + dx,y+dy));
             
             if(isEnemy(piece)){
-                Psychopomp psychopomp = new Psychopomp(piece, DeathType.KILLED);
+                Psychopomp psychopomp = new Psychopomp(piece, this);
             }
         }
         
-        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
+        Psychopomp psychopomp = new Psychopomp(this);
     }
     
+    /**
+     * Checks if the piece passed in is an enemy or ally
+     * @param piece
+     * @return 
+     */
     private boolean isEnemy(ChessPiece piece) {
         return piece != null && piece.getTeamColour() != this.getTeamColour();
     }

@@ -4,11 +4,13 @@
  */
 package chess.pieces.enhanced;
 
+import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Direction;
 import chess.pieces.Queen;
-import chess.pieces.abilities.PowerContext;
-import chess.pieces.abilities.Powerable;
+import chess.pieces.abilities.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -20,16 +22,27 @@ public class SuperQueen extends Queen implements Powerable{
         super(initialPosition, isWhite);
         setSpecial(true);
     }
+    
+    Power reg = new Power("Blessing of Freedom", 5, false);
+    StatusEffect effect = new StatusEffect(1, EffectType.MOVEMENT);
 
     @Override
     public void useRegularPower(PowerContext pc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ChessPiece ally = pc.getTargetPiece();
+        
+        if(reg.charged()){
+            if(ally.getTeamColour() == this.getTeamColour()){
+                
+                ally.addStatusEffect(effect);
+                
+                ally.setMovementOverride(this.getAllowedMoves());
+            }
+        }
+        
     }
 
     @Override
     public void useUltimatePower(PowerContext pc) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
 }

@@ -9,11 +9,14 @@ package chess.pieces.abilities;
  * @author dosum
  */
 import chess.pieces.*;
+import java.util.*;
 
 public class PowerContext {
     private Direction direction;
     private ChessPiece targetPiece;
     private CoOrdinates targetCoordinates;
+    
+    private List <ChessPiece> chessP = new ArrayList<>();
 
     public PowerContext() {}
 
@@ -28,6 +31,14 @@ public class PowerContext {
     public PowerContext(ChessPiece targetPiece, Direction direction) {
         this.targetPiece = targetPiece;
         this.direction = direction;
+    }
+    
+    public void addChessPiece(ChessPiece piece){
+        chessP.add(piece);
+    }
+    
+    public List<ChessPiece> getPieces(){
+        return chessP;
     }
 
     public ChessPiece getTargetPiece() {

@@ -11,8 +11,10 @@ package chess.pieces.abilities;
 public enum EffectType {
     // can't die
     PROTECTION,
+    
     // Movement related
-    STUN,
+    MOVEMENT,
+    
     // immune to statusEffect
     IMMUNE;
     

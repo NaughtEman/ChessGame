@@ -24,7 +24,8 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     
     private static final List<Direction> STAB_DIRECTIONS = List.of(Direction.UP, Direction.LEFT, Direction.RIGHT);
     
-    private Power ultimate = new Power("Last Lance", 6, true);
+    private Power ult = new Power("Last Lance", 6, true);
+    private Power reg = new Power("Spear Stab", 0, true);
 
 
     public Spearmen(String name, CoOrdinates initialPosition, boolean isWhite) {
@@ -68,7 +69,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
         
         CoOrdinates target = new CoOrdinates(x + dx, y + dy);
         if (!target.isOOB()) {
-            board.removePieceAt(target);
+            Psychopomp psychopomp = new Psychopomp(board.getPieceAt(target),this);
         }
     }
 
@@ -100,24 +101,26 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
         
         Direction dir = pc.getDirection();
         
-        // Placeholder for throwing spear logic
-        System.out.println("⚡ Spearman throws spear to the " + dir + " (ultimate power)");
-        int x = getCordnts().getX();
-        int y = getCordnts().getY();
-        
-        int dx = dir.dx();
-        int dy = dir.dy();
-        
-        while(! new CoOrdinates(x+dx, y+dy).isOOB()){
-            x += dx;
-            y += dy;
-            
-            if(isEnemy(board.getPieceAt(x, y))){
-                board.removePieceAt(new CoOrdinates(x,y));
+        if(ult.charged()){
+            System.out.println("⚡ Spearman throws spear to the " + dir + " (ultimate power)");
+            int x = getCordnts().getX();
+            int y = getCordnts().getY();
+
+            int dx = dir.dx();
+            int dy = dir.dy();
+
+            while(! new CoOrdinates(x+dx, y+dy).isOOB()){
+                x += dx;
+                y += dy;
+
+                if(isEnemy(board.getPieceAt(x, y))){
+                    board.removePieceAt(new CoOrdinates(x,y));
+                }
             }
+            System.out.println("☠️ Spearman at " + getCordnts() + " sacrifices their life.");
+            Psychopomp psychopomp = new Psychopomp(this);
         }
-        System.out.println("☠️ Spearman at " + getCordnts() + " sacrifices their life.");
-        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
+        
     }
     
 }

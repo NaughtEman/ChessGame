@@ -20,7 +20,7 @@ import chess.pieces.abilities.PowerContext;
 public class SuperKing extends King implements Powerable{
     
     
-    private Power regular = new Power("Royal escape",2,false);
+    private Power reg = new Power("Royal escape",0,false);
 
     public SuperKing(CoOrdinates initialPosition, boolean isWhite) {
         super(initialPosition, isWhite);
@@ -43,7 +43,11 @@ public class SuperKing extends King implements Powerable{
 
     @Override
     public void useRegularPower(PowerContext pc) {
-        board.swap(pc.getTargetPiece().getCordnts(), getCordnts());
+        if(reg.charged()){
+            board.swap(pc.getTargetPiece().getCordnts(), getCordnts());
+        }else{
+            System.out.println("Power not charged");
+        }
     }
 
     @Override

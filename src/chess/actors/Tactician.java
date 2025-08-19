@@ -25,6 +25,13 @@ public class Tactician {
             System.out.println("Error: Attempted to move a null piece.");
             return false;
         }
+        
+        if (piece.movementAltered()) {
+            piece.setMovementFlag(false);
+            //overriddenMoves.clear();
+            // Optionally remove the status effect too, if needed
+        }
+
 
         piece.movementLogic();
 
@@ -91,7 +98,7 @@ public class Tactician {
         attackingCommander.getVanquished().add(targetPiece);
         //targetPiece.goToValhalla(defendingCommander);
         
-        Psychopomp psychopomp = new Psychopomp(targetPiece, DeathType.KILLED);
+        Psychopomp psychopomp = new Psychopomp(targetPiece, attacker);
 
         // Remove captured piece from the board
         //board.getBoard().remove(targetCoords);

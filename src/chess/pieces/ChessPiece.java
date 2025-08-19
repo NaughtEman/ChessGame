@@ -12,6 +12,7 @@ package chess.pieces;
 import chess.pieces.abilities.StatusEffect;
 import chess.battlefield.ChessBoard;
 import chess.actors.Commander;
+import chess.pieces.abilities.EffectType;
 import java.util.*;
 import chess.pieces.dead.*;
 
@@ -21,10 +22,17 @@ public abstract class ChessPiece {
     
     protected ChessBoard board = ChessBoard.getInstance();
     
-    private boolean isFree = true; // if a piece is captured or not
-    boolean isWhite = true; // team color
+    private int noOfKills;
     
+    private boolean isFree = true; // if a piece is captured or not
+    private boolean isWhite = true; // team color
+    
+    // Is this an enhanced piece
     private boolean isSpecial;
+    
+    // Are there overridden moves.
+    private boolean hasMovementAltered = false;
+
     
     private String name; // piece name
      
@@ -34,7 +42,9 @@ public abstract class ChessPiece {
     
     private List<CoOrdinates> allowedMoves = new ArrayList<>(); // stores all allowed moves
     
-    private List<StatusEffect> statusEffect = new ArrayList<>();
+    private List<CoOrdinates> alteredMoves = new ArrayList<>();
+    
+    private List<StatusEffect> statusEffects = new ArrayList<>();
     
     /**
      * ChessPiece constructor
@@ -88,8 +98,31 @@ public abstract class ChessPiece {
      * @return allowedMoves
      */
     public List<CoOrdinates> getAllowedMoves() {
+        if (hasMovementAltered) {
+            return alteredMoves;
+        }
         return allowedMoves;
     }
+    
+    /**
+     * Used when another piece needs other than this has to change its movement
+     * E.g Queen reg power.
+     * @param moves 
+     */
+    public void setMovementOverride(List<CoOrdinates> moves) {
+        alteredMoves.clear();
+        this.alteredMoves = new ArrayList<>(moves);
+        this.hasMovementAltered = true;
+    }
+    
+    public boolean movementAltered(){
+        return hasMovementAltered;
+    }
+    
+    public void setMovementFlag(boolean altered){
+        this.hasMovementAltered = altered;
+    }
+
     
     /**
      * Prints allowed moves
@@ -136,6 +169,14 @@ public abstract class ChessPiece {
 
         // If the square is free, add it as a valid move
         this.allowedMoves.add(cd);
+    }
+    
+    public void addAllowedMove(CoOrdinates cd, EffectType type) {
+        if (type == EffectType.MOVEMENT) {
+            alteredMoves.add(cd);
+        } else {
+            allowedMoves.add(cd);
+        }
     }
 
     /** 
@@ -198,7 +239,7 @@ public abstract class ChessPiece {
     }
 
     /**
-     * 
+     * Movement logic where each piece implements its own 
      */
     public abstract void movementLogic();
     
@@ -245,6 +286,14 @@ public abstract class ChessPiece {
     }
     
     public void addStatusEffect(StatusEffect se){
-        statusEffect.add(se);
+        statusEffects.add(se);
+    }
+    
+    public void incrementKills(){
+        noOfKills++;
+    }
+    
+    public int getKills(){
+        return noOfKills;
     }
 }

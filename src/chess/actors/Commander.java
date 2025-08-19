@@ -12,6 +12,7 @@ import chess.battlefield.ChessBoard;
 import java.util.*;
 import chess.*;
 import chess.pieces.*;
+import chess.pieces.enhanced.*;
 
 public class Commander { 
     
@@ -68,7 +69,7 @@ public class Commander {
         }
 
         // Place Rooks
-        soldiers.add(new Rook(new CoOrdinates(1, mainRow), isWhite));
+        soldiers.add(new SuperRook(new CoOrdinates(1, mainRow), isWhite));
         soldiers.add(new Rook(new CoOrdinates(8, mainRow), isWhite));
 
         // Place Knights
@@ -76,14 +77,14 @@ public class Commander {
         soldiers.add(new Knight(new CoOrdinates(7, mainRow), isWhite));
 
         // Place Bishops
-        soldiers.add(new Bishop(new CoOrdinates(3, mainRow), isWhite));
+        soldiers.add(new SuperBishop(new CoOrdinates(3, mainRow), isWhite));
         soldiers.add(new Bishop(new CoOrdinates(6, mainRow), isWhite));
 
         // Place Queen (on the matching color square)
-        soldiers.add(new Queen(new CoOrdinates(4, mainRow), isWhite));
+        soldiers.add(new SuperQueen(new CoOrdinates(4, mainRow), isWhite));
 
         // Place King
-        soldiers.add(new King(new CoOrdinates(5, mainRow), isWhite));
+        soldiers.add(new SuperKing(new CoOrdinates(5, mainRow), isWhite));
     
         board.updateBoard(soldiers);
     }

@@ -49,4 +49,11 @@ public class Power {
     public void resetCooldown(){
         cooldown = cooldownReset;
     }
+    
+    public boolean charged(){
+        if(cooldown == 0){
+            return true;
+        }
+        return false;
+    }
 }

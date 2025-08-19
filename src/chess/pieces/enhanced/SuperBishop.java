@@ -4,14 +4,11 @@
  */
 package chess.pieces.enhanced;
 
-import chess.pieces.abilities.Powerable;
-import chess.pieces.abilities.Power;
+import chess.pieces.abilities.*;
 import chess.pieces.Bishop;
 import chess.pieces.ChessPiece;
 import chess.pieces.CoOrdinates;
 import chess.pieces.Direction;
-import chess.pieces.abilities.PowerContext;
-import chess.pieces.abilities.StatusEffect;
 import chess.pieces.dead.*;
 import java.util.List;
 
@@ -28,9 +25,9 @@ public class SuperBishop extends Bishop implements Powerable{
     ChessPiece lpR1,lpR2,lpR3;
     
     // -1 meaning passive
-    StatusEffect regBlessing = new StatusEffect("Prayer of Protection", -1, "protection");
+    StatusEffect regBlessing = new StatusEffect(-1, EffectType.PROTECTION);
     
-    StatusEffect ultBlessing = new StatusEffect("Prayer of Protection", 3, "protection");
+    StatusEffect ultBlessing = new StatusEffect(3, EffectType.PROTECTION);
 
     public SuperBishop(CoOrdinates initialPosition, boolean isWhite) {
         super(initialPosition, isWhite);
@@ -42,7 +39,7 @@ public class SuperBishop extends Bishop implements Powerable{
 
     @Override
     public void useRegularPower(PowerContext pc) {
-        if(reg.getCooldown() == 0){
+        if(reg.charged()){
             for(CoOrdinates coords:getAllowedMoves()){
                 ChessPiece receiver = board.getPieceAt(coords.getX(), coords.getY());
                 if(!isEnemy(receiver)){
@@ -54,20 +51,14 @@ public class SuperBishop extends Bishop implements Powerable{
 
     @Override
     public void useUltimatePower(PowerContext pc) {
-        lpR1.addStatusEffect(ultBlessing);
-        lpR2.addStatusEffect(ultBlessing);
-        lpR3.addStatusEffect(ultBlessing);
         
-        Psychopomp psychopomp = new Psychopomp(this, DeathType.SUICIDE);
+        if(ult.charged()){
+            pc.getPieces();
+       
+            for(ChessPiece temp : pc.getPieces()){
+                temp.addStatusEffect(ultBlessing);
+            }
+            Psychopomp psychopomp = new Psychopomp(this);
+        }
     }
-    
-    public void prepareUlt(CoOrdinates cd1, CoOrdinates cd2, CoOrdinates cd3){
-         if (!isEnemy(board.getPieceAt(cd1))) lpR1 = board.getPieceAt(cd1);
-         
-         if (!isEnemy(board.getPieceAt(cd2))) lpR2 = board.getPieceAt(cd2);
-
-         if (!isEnemy(board.getPieceAt(cd3))) lpR3 = board.getPieceAt(cd3);
-         
-    }
-    
 }
