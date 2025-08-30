@@ -24,12 +24,12 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     
     private static final List<Direction> STAB_DIRECTIONS = List.of(Direction.UP, Direction.LEFT, Direction.RIGHT);
     
-    private Power ult = new Power("Last Lance", 6, true);
+    private Power ult = new Power("Last Lance", 0, true);
     private Power reg = new Power("Spear Stab", 0, true);
 
 
-    public Spearmen(String name, CoOrdinates initialPosition, boolean isWhite) {
-        super(name, initialPosition, isWhite, true);
+    public Spearmen( CoOrdinates initialPosition, boolean isWhite) {
+        super("SpearMan", initialPosition, isWhite, true);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
         
         CoOrdinates target = new CoOrdinates(x + dx, y + dy);
         if (!target.isOOB()) {
-            Psychopomp psychopomp = new Psychopomp(board.getPieceAt(target),this);
+             new Psychopomp(board.getPieceAt(target),this);
         }
     }
 
@@ -77,7 +77,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     public void onBoardChanged(ChessBoard board) {
         for(Direction dir: STAB_DIRECTIONS){
             if(canStab(dir)){
-                System.out.println("⚔️ Spearman at " + getCordnts() + " can stab " + dir + "!");
+                System.out.println("âš”ï¸� Spearman at " + getCordnts() + " can stab " + dir + "!");
             }else {
                 continue;
             }
@@ -92,33 +92,35 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
             stab(dir);
             System.out.println("Spearman stabbed " + dir + "!");
         } else {
-            System.out.println("❌ No enemy to stab in direction: " + dir);
+            System.out.println("â�Œ No enemy to stab in direction: " + dir);
         }
     }
 
     @Override
     public void useUltimatePower(PowerContext pc) {
-        
         Direction dir = pc.getDirection();
-        
         if(ult.charged()){
             System.out.println("⚡ Spearman throws spear to the " + dir + " (ultimate power)");
             int x = getCordnts().getX();
             int y = getCordnts().getY();
-
-            int dx = dir.dx();
-            int dy = dir.dy();
-
-            while(! new CoOrdinates(x+dx, y+dy).isOOB()){
-                x += dx;
-                y += dy;
-
-                if(isEnemy(board.getPieceAt(x, y))){
-                    board.removePieceAt(new CoOrdinates(x,y));
+            int dx = dir.dx(); // change in x
+            int dy = dir.dy(); // change in y
+            int tx = x;
+            int ty = y;
+            while(! new CoOrdinates(tx+dx, ty+dy).isOOB()){
+                tx += dx;
+                ty += dy;
+                ChessPiece target = board.getPieceAt(tx, ty);
+                if(isEnemy(target)){
+                    System.out.println("\nKilled " + target.getFullName() + "\nId: " + target.getID());
+                    new Psychopomp(target, this);
+                    
                 }
             }
             System.out.println("☠️ Spearman at " + getCordnts() + " sacrifices their life.");
-            Psychopomp psychopomp = new Psychopomp(this);
+            new Psychopomp(this);
+        }else{
+            System.out.println("Power not charged");
         }
         
     }

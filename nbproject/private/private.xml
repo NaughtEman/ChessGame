@@ -14,9 +14,9 @@
         <group>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/Tester.java</file>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/players/Commander.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/abilities/PowerManager.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/abilities/Power.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/abilities/Powerable.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/dead/Mortavia.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/enhanced/Spearmen.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/dead/Psychopomp.java</file>
         </group>
     </open-files>
 </project-private>

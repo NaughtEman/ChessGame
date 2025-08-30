@@ -12,6 +12,8 @@ import chess.pieces.CoOrdinates;
 import chess.pieces.*;
 import chess.pieces.abilities.PowerContext;
 import chess.pieces.abilities.PowerManager;
+import chess.pieces.dead.Mortavia;
+import chess.pieces.enhanced.Spearmen;
 import chess.pieces.enhanced.SuperKing;
 
 
@@ -34,24 +36,28 @@ public class Tester {
         
         ChessBoard board = ChessBoard.getInstance();
         
-        PowerManager.listPowerDetails(white);
+        //PowerManager.listPowerDetails(white);
         
-        /*
+        Mortavia mortavia = Mortavia.getInstance();
 
         board.displayBoard();
         
-        PowerContext pc = new PowerContext(board.getPieceAt(new CoOrdinates(1,1)));
+        PowerContext pc = new PowerContext(Direction.UP);
         //.useRegularPower(pc);
-        if(board.getPieceAt(new CoOrdinates(5,1)).special()){
-            System.out.println("This is a special piece");
+        
+        ChessPiece piece = board.getPieceAt(new CoOrdinates(6,1));
+        if(piece.special()){
+            System.out.println(piece.getFullName());
         }
         
-        SuperKing king = (SuperKing) board.getPieceAt(new CoOrdinates(5,1));
+        Spearmen spearMan = (Spearmen) piece;
         
-        king.useRegularPower(pc);
+        spearMan.useUltimatePower(pc);
         
         board.displayBoard();
-        */
+        
+        mortavia.damnedSouls();
+        
     }
     
 }

@@ -55,7 +55,7 @@ public abstract class ChessPiece {
         this.cordnts = initialPosition; 
         this.isWhite = isWhite;
         this.isSpecial = isSpecial;
-        id = String.format("%s",name, initialPosition.toString());
+        id = String.format("%s %s",name, initialPosition.toString());
     }
     
     public String getID(){

@@ -75,11 +75,11 @@ public class Commander {
 
         // Place Knights
         soldiers.add(new Knight(new CoOrdinates(2, mainRow), isWhite));
-        soldiers.add(new Knight(new CoOrdinates(7, mainRow), isWhite));
+        soldiers.add(new Bomber(new CoOrdinates(7, mainRow), isWhite));
 
         // Place Bishops
         soldiers.add(new SuperBishop(new CoOrdinates(3, mainRow), isWhite));
-        soldiers.add(new Bishop(new CoOrdinates(6, mainRow), isWhite));
+        soldiers.add(new Spearmen(new CoOrdinates(6, mainRow), isWhite));
 
         // Place Queen (on the matching color square)
         soldiers.add(new SuperQueen(new CoOrdinates(4, mainRow), isWhite));

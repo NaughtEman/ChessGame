@@ -37,4 +37,10 @@ public class Mortavia {
         
     }
     
+    public void damnedSouls(){
+        for (Map.Entry<String, Psychopomp> entry : mortavia.entrySet()) {
+            System.out.println(entry.getValue().getChessPiece().getFullName() + "\nDeath by " + entry.getValue().getDeathType());
+        }
+    }
+    
 }

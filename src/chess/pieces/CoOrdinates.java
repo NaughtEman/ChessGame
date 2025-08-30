@@ -148,5 +148,9 @@ public class CoOrdinates {
         return Objects.hash(x, y);
     }
 
+@Override
+    public String toString(){
+        return String.format("%d,%d",x,y);
+    }
     
 } //close class
