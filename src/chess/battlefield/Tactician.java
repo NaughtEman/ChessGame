@@ -11,7 +11,7 @@ package chess.battlefield;
 import chess.game.GameManager;
 import chess.battlefield.ChessBoard;
 import chess.*;
-import chess.players.Commander;
+import chess.players.General;
 import chess.pieces.*;
 
 import chess.pieces.dead.*;
@@ -92,15 +92,14 @@ public class Tactician {
         }
 
         // Retrieve the commanders
-        Commander attackingCommander = gm.getPlayer(attacker.getTeamColour()); // killer
-        Commander defendingCommander = gm.getPlayer(targetPiece.getTeamColour()); // getting killed
+        General attackingCommander = gm.getPlayer(attacker.getTeamColour()); // killer
+        General defendingCommander = gm.getPlayer(targetPiece.getTeamColour()); // getting killed
+        
+        //Increment kill count
+        attacker.incrementKills();
 
         // Mark the captured piece
-        targetPiece.deathNote(attacker);
-        attackingCommander.getVanquished().add(targetPiece);
-        //targetPiece.goToValhalla(defendingCommander);
-        
-        Psychopomp psychopomp = new Psychopomp(targetPiece, attacker);
+        new Psychopomp(targetPiece, attacker);
 
         // Remove captured piece from the board
         //board.getBoard().remove(targetCoords);

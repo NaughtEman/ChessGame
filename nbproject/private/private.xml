@@ -12,11 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/Tester.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/players/General.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/ChessPiece.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/CoOrdinates.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/battlefield/Tactician.java</file>
             <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/players/Commander.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/dead/Mortavia.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/enhanced/Spearmen.java</file>
-            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/dead/Psychopomp.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/battlefield/ChessBoard.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/PieceFactory.java</file>
+            <file>file:/C:/Users/dosum/Documents/NetBeansProjects/ChessGame/src/chess/pieces/Pawn.java</file>
         </group>
     </open-files>
 </project-private>

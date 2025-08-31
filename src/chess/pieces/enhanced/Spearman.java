@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author dosum
  */
-public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
+public class Spearman extends ChessPiece implements BoardObserver, Powerable{
     
     private static final List<Direction> STAB_DIRECTIONS = List.of(Direction.UP, Direction.LEFT, Direction.RIGHT);
     
@@ -28,7 +28,7 @@ public class Spearmen extends ChessPiece implements BoardObserver, Powerable{
     private Power reg = new Power("Spear Stab", 0, true);
 
 
-    public Spearmen( CoOrdinates initialPosition, boolean isWhite) {
+    public Spearman( CoOrdinates initialPosition, boolean isWhite) {
         super("SpearMan", initialPosition, isWhite, true);
     }
 

@@ -5,7 +5,7 @@
 package chess.pieces.abilities;
 
 import chess.pieces.ChessPiece;
-import chess.players.Commander;
+import chess.players.General;
 
 /**
  *
@@ -17,7 +17,7 @@ public class PowerManager {
         
     } 
     
-    public static void decrementCooldown(Commander commander){
+    public static void decrementCooldown(General commander){
         
         for(ChessPiece piece : commander.getSoldiers()){
             if (piece instanceof Powerable powerUser) {
@@ -37,7 +37,7 @@ public class PowerManager {
         }
     }
     
-    public static void listPowerDetails(Commander commander){
+    public static void listPowerDetails(General commander){
         for(ChessPiece piece : commander.getSoldiers()){
             if (piece instanceof Powerable powerUser) {
                 

@@ -4,7 +4,7 @@
  */
 package chess.game;
 
-import chess.players.Commander;
+import chess.players.General;
 
 /**
  *
@@ -15,8 +15,8 @@ public class GameManager implements GameEndListener{
     private static final GameManager instance = new GameManager();
     private boolean gameRunning = true;
     
-    private final Commander whitePlayer = new Commander(true);
-    private final Commander blackPlayer = new Commander(false);
+    private final General whitePlayer = new General(true);
+    private final General blackPlayer = new General(false);
 
     private GameManager() {} // Private constructor to enforce singleton
 
@@ -24,7 +24,7 @@ public class GameManager implements GameEndListener{
         return instance;
     }
 
-    public Commander getPlayer(boolean isWhite) {
+    public General getPlayer(boolean isWhite) {
         return isWhite ? whitePlayer : blackPlayer;
     }
     

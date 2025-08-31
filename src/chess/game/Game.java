@@ -4,7 +4,7 @@
  */
 package chess.game;
 
-import chess.players.Commander;
+import chess.players.General;
 import chess.battlefield.ChessBoard;
 import java.util.*;
 import java.util.concurrent.*;
@@ -24,12 +24,12 @@ public class Game {
     GameManager gm = GameManager.getInstance();
     GameHelper gH = new GameHelper();
     
-    Commander white = gm.getPlayer(true);
-    Commander black = gm.getPlayer(false);
+    General white = gm.getPlayer(true);
+    General black = gm.getPlayer(false);
     
     ChessBoard board = ChessBoard.getInstance();
     
-    Commander player;
+    General player;
     
     private String mode = "";
     Difficulty dif = new Difficulty();
@@ -78,9 +78,9 @@ public class Game {
             System.out.println(player.getpName() + " has surrendered! ");
             stopGame();
         } else if (gH.getWords().contains("fallen")) {
-            player.printFallen();
+            
         } else if (gH.getWords().contains("vanquished")) {
-            player.printVanquished();
+            
         } else if (!gH.getWords().isEmpty()) {
             board.movePiece(gH.getWords().get(0), gH.getWords().get(1));
             player.incrementMoves();

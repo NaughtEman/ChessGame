@@ -4,7 +4,7 @@
  */
 package chess.battlefield;
 
-import chess.players.Commander;
+import chess.players.General;
 import chess.pieces.CoOrdinates;
 import chess.pieces.ChessPiece;
 import chess.utilities.BoardObserver;

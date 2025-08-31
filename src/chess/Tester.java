@@ -4,7 +4,7 @@
  */
 package chess;
 
-import chess.players.Commander;
+import chess.players.General;
 import chess.game.GameManager;
 import chess.battlefield.ChessBoard;
 import chess.game.GameHelper;
@@ -13,7 +13,7 @@ import chess.pieces.*;
 import chess.pieces.abilities.PowerContext;
 import chess.pieces.abilities.PowerManager;
 import chess.pieces.dead.Mortavia;
-import chess.pieces.enhanced.Spearmen;
+import chess.pieces.enhanced.Spearman;
 import chess.pieces.enhanced.SuperKing;
 
 
@@ -31,8 +31,8 @@ public class Tester {
         
         GameHelper gH = new GameHelper();
 
-        Commander white = gm.getPlayer(true);
-        Commander black = gm.getPlayer(false);
+        General white = gm.getPlayer(true);
+        General black = gm.getPlayer(false);
         
         ChessBoard board = ChessBoard.getInstance();
         
@@ -42,6 +42,7 @@ public class Tester {
 
         board.displayBoard();
         
+        /*
         PowerContext pc = new PowerContext(Direction.UP);
         //.useRegularPower(pc);
         
@@ -50,14 +51,14 @@ public class Tester {
             System.out.println(piece.getFullName());
         }
         
-        Spearmen spearMan = (Spearmen) piece;
+        Spearman spearMan = (Spearman) piece;
         
         spearMan.useUltimatePower(pc);
         
         board.displayBoard();
         
         mortavia.damnedSouls();
-        
+        */
     }
     
 }

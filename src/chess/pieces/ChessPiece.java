@@ -11,7 +11,7 @@ package chess.pieces;
 
 import chess.pieces.abilities.StatusEffect;
 import chess.battlefield.ChessBoard;
-import chess.players.Commander;
+import chess.players.General;
 import chess.pieces.abilities.EffectType;
 import java.util.*;
 import chess.pieces.dead.*;
@@ -208,15 +208,6 @@ public abstract class ChessPiece {
         // Use when incoporating AI or if performance becomes an issue. 
         // new Thread(this::movementLogic).start(); 
     }
-    
-    /**
-     * Gets the piece that killed this 
-     * @param cp the capturer 
-     */
-    public void deathNote(ChessPiece cp) {
-        this.capturedBy = cp.getFullName();
-        captured();   
-    }
 
     public void captured() {
         this.isFree = false;
@@ -228,14 +219,6 @@ public abstract class ChessPiece {
     
     public String getFullName(){
         return String.format( isWhite ? "W" + getName(): "B" + getName());
-    }
-    
-    /**
-     * Sends this piece to valhalla
-     * @param commander 
-     */
-    public void goToValhalla(Commander commander){
-        commander.quarterMaster(this);
     }
 
     /**
