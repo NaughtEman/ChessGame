@@ -33,9 +33,9 @@ public class Commander {
             traditional(isWhite);
         }else{
             int i =0;
-            //while(i != 16){
+            while(i != 16){
                 addPiece(piece, initialPosition, isWhite);
-            //}
+            }
         }
         board.updateBoard(army);
         return army;// final immutable army object
