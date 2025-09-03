@@ -1,0 +1,133 @@
+/* game.css */
+.root {
+    -fx-background-color: #2c3e50;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Chess board styling */
+.chess-board {
+    -fx-border-color: #8b4513;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 10);
+}
+
+.chess-square {
+    -fx-border-color: #7d5c3c;
+    -fx-border-width: 1;
+}
+
+.white-square {
+    -fx-background-color: #f0d9b5;
+}
+
+.black-square {
+    -fx-background-color: #b58863;
+}
+
+.selected-square {
+    -fx-background-color: #ffeb3b;
+    -fx-opacity: 0.6;
+}
+
+.valid-move {
+    -fx-background-color: #4caf50;
+    -fx-opacity: 0.4;
+}
+
+.capture-move {
+    -fx-background-color: #ff5252;
+    -fx-opacity: 0.4;
+}
+
+/* Piece styling (you'll use images, but here's backup) */
+.chess-piece {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.white-piece {
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 3, 0, 0, 1);
+}
+
+.black-piece {
+    -fx-text-fill: #000000;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.8), 3, 0, 0, 1);
+}
+
+/* Top panel styling */
+.top-panel {
+    -fx-background-color: linear-gradient(to right, #34495e, #2c3e50);
+    -fx-padding: 10;
+    -fx-border-color: #ecf0f1;
+    -fx-border-width: 0 0 2 0;
+}
+
+.info-label {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0, 0, 1);
+}
+
+.menu-button {
+    -fx-background-color: linear-gradient(to bottom, #e67e22, #d35400);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #f39c12, #e67e22);
+}
+
+/* Turn indicator */
+.white-turn {
+    -fx-text-fill: #ecf0f1;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 10;
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #ecf0f1;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+}
+
+.black-turn {
+    -fx-text-fill: #2c3e50;
+    -fx-background-color: rgba(0,0,0,0.2);
+    -fx-background-radius: 10;
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #2c3e50;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+}
+
+/* Status messages */
+.status-message {
+    -fx-text-fill: #f39c12;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+}
+
+/* Power/ability buttons */
+.power-button {
+    -fx-background-color: linear-gradient(to bottom, #9b59b6, #8e44ad);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 5 15 5 15;
+    -fx-cursor: hand;
+}
+
+.power-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #8e44ad, #6c3483);
+}
+
+.power-button:disabled {
+    -fx-background-color: linear-gradient(to bottom, #bdc3c7, #95a5a6);
+    -fx-text-fill: #7f8c8d;
+}

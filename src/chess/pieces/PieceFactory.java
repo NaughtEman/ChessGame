@@ -39,4 +39,9 @@ public class PieceFactory {
         }
         throw new IllegalArgumentException("Unknown piece type: " + type);
     }
+    
+    // Returns all piece names
+    public static String[] getAllPieceNames() {
+		return pieceFactory.keySet().toArray(new String[0]);
+	}
 }

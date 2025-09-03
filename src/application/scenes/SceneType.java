@@ -1,0 +1,6 @@
+package application.scenes;
+
+public enum SceneType {
+	LOGIN, MAIN_MENU, GAME, DIFFICULTY, ARMY_FORMATION,
+	SIGN_UP, SETTINGS, PROFILE, STATISTICS, ABOUT, PLAY, ONLINE, STORY_MODE 
+}

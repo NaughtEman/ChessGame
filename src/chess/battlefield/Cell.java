@@ -26,8 +26,7 @@ public class Cell {
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        
-        cd.setCordnts(x, y);
+        this.cd = new CoOrdinates(x, y);
     }
 
     public Cell(CoOrdinates cd) {

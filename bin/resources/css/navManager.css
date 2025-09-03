@@ -1,0 +1,37 @@
+/* navigation.css */
+.nav-bar {
+    -fx-background-color: linear-gradient(to bottom, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.8));
+    -fx-padding: 10px;
+    -fx-border-color: #ecf0f1;
+    -fx-border-width: 0 0 1px 0;
+    -fx-spacing: 10px;
+}
+
+.nav-button {
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.back-button {
+    -fx-background-color: linear-gradient(to bottom, #3498db, #2980b9);
+}
+
+.back-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #2980b9, #1c6ea4);
+}
+
+.exit-button {
+    -fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b);
+}
+
+.exit-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #c0392b, #a93226);
+}
+
+/* Add to your existing CSS files */
+/* @import "navigation.css";*/
