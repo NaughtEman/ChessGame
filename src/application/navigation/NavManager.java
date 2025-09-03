@@ -1,6 +1,7 @@
 package application.navigation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import application.scenes.SceneManager;
@@ -12,25 +13,27 @@ import javafx.scene.Scene;
  * @author dosum
  */
 public class NavManager {
-	private List<SceneType> sceneHistory = new ArrayList<>();
+	private List<SceneType> sceneHistory = Collections.synchronizedList(new ArrayList<>());
 	private SceneManager sceneManager;
-	//private SceneType sceneType;
 	
 	public NavManager(SceneManager sceneManager) {
 		this.sceneManager = sceneManager;
 	}
 
-	public void navigateTo(SceneType sceneType) {
+	public void updateHistory(SceneType sceneType) {
+		
+		if (sceneHistory.isEmpty()) {
+            sceneHistory.add(sceneType);
+        }
 		
 		if(!sceneHistory.isEmpty()) {
 			
 			// Push current scene to history before navigating
-	        if (!sceneHistory.isEmpty() && sceneHistory.get(sceneHistory.size() - 1) != sceneType) {
-	            sceneHistory.add(sceneType);
-	        } else if (sceneHistory.isEmpty()) {
+	        if (sceneHistory.get(sceneHistory.size() - 1) != sceneType) {
+	        	//sceneHistory.remove(sceneHistory.size() - 1);
 	            sceneHistory.add(sceneType);
 	        }
-	        showScene(sceneType);
+	        //showScene(sceneType);
 		}
 	}
 
@@ -38,6 +41,7 @@ public class NavManager {
 		
 		if (sceneHistory.size() <= 1) {
             // Can't go back from the first scene
+			System.out.println("No previous scene to go back to.");
             return false;
         }
 		
@@ -45,7 +49,7 @@ public class NavManager {
 		// Remove current scene
 		sceneHistory.remove(sceneHistory.size() - 1);
 		// Get previous scene
-		SceneType previousScene = sceneHistory.get(sceneHistory.size() - 2);
+		SceneType previousScene = sceneHistory.get(sceneHistory.size() - 1);
 		showScene(previousScene);
 		return true;
 	}

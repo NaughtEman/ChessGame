@@ -44,7 +44,7 @@ public abstract class BaseScene {
      navBar.getStyleClass().add("nav-bar");
      
      // Only add back button if we can go back
-     if (navManager.goBack()) {
+     if (navManager.canGoBack()) {
          Button backButton = createBackButton();
          navBar.getChildren().add(backButton);
      }
@@ -62,7 +62,7 @@ public abstract class BaseScene {
      backButton.setOnAction(e -> navManager.goBack());
      return backButton;
  }
- /*
+ 
  protected void setupKeyboardShortcuts() {
 	    scene.setOnKeyPressed(event -> {
 	        switch (event.getCode()) {
@@ -78,7 +78,7 @@ public abstract class BaseScene {
 	                break;
 	        }
 	    });
-	}*/
+	}
  
  // Override this in subclasses to add additional navigation items
  protected void addNavigationItems(HBox navBar) {
